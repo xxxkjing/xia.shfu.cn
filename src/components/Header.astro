@@ -6,7 +6,10 @@ import LinkButton from "./LinkButton.astro";
 export interface Props {
   activeNav?: "blog" | "now" | "slashes" | "search";
 }
-
+// 示例 URL：https://example.com/blog/post-1
+const pathname = Astro.request.url.pathname; // 输出 "/blog/post-1" ‌:ml-citation{ref="4" data="citationList"}
+const segments = pathname.split('/').filter(segment => segment !== ''); // ["blog", "post-1"]
+const firstLevel = segments || ''; // "blog"
 const { activeNav } = Astro.props;
 ---
 
@@ -45,13 +48,13 @@ const { activeNav } = Astro.props;
         </button>
         <ul id="menu-items" class="display-none sm:flex">
           <li>
-            <a href="/blog/" class={activeNav === "blog" ? "active" : "true"}>
+            <a href="/blog/" class={firstLevel === "blog" ? "active" : ""}>
               所有文章
             </a>
           </li>
 
           <li>
-            <a href="/now/" class={activeNav === "now" ? "active" : "true"}>
+            <a href="/now/" class={firstLevel === "now" ? "active" : ""}>
               当下状态
             </a>
           </li>
@@ -67,7 +70,7 @@ const { activeNav } = Astro.props;
             </a>
           </li>
           <li>
-            <a href="/slash/" class={activeNav === "slashes" ? "active" : "true"}>
+            <a href="/slash/" class={firstLevel === "slashes" ? "active" : ""}>
               赛博地图
             </a>
           </li>
@@ -75,7 +78,7 @@ const { activeNav } = Astro.props;
             <LinkButton
               href="/search/"
               className={`focus-outline p-3 sm:p-1 ${
-                activeNav === "search" ? "active" : ""
+                firstLevel === "search" ? "active" : ""
               } flex`}
               ariaLabel="search"
               title="搜索"
