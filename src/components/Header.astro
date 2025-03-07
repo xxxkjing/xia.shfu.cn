@@ -11,6 +11,9 @@ const pathname = Astro.url.pathname; // 输出 "/blog/post-1" ‌:ml-citation{re
 const segments = pathname.split('/').filter(segment => segment !== ''); // ["blog", "post-1"]
 const firstLevel = segments || ''; // "blog"
 const { activeNav } = Astro.props;
+export interface Props {
+  firstLevel;
+}
 ---
 
 <header>
