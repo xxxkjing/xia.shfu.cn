@@ -4,7 +4,7 @@ import Hr from "./Hr.astro";
 import LinkButton from "./LinkButton.astro";
 
 export interface Props {
-  activeNav?: "blog" | "tags" | "about" | "search" | "links" | "now" | "slashes";
+  activeNav?: "blog" | "now" | "slashes" | "search";
 }
 
 const { activeNav } = Astro.props;
@@ -46,13 +46,13 @@ const { activeNav } = Astro.props;
         <ul id="menu-items" class="display-none sm:flex">
           <li>
             <a href="/blog/" class={activeNav === "blog" ? "active" : ""}>
-              Blog
+              所有文章
             </a>
           </li>
 
           <li>
             <a href="/now/" class={activeNav === "now" ? "active" : ""}>
-              Now
+              当下状态
             </a>
           </li>
           <li>
@@ -63,12 +63,12 @@ const { activeNav } = Astro.props;
               aria-label="rss feed"
               title="RSS Feed"
             >
-              RSS
+              RSS源
             </a>
           </li>
           <li>
             <a href="/slash/" class={activeNav === "slashes" ? "active" : ""}>
-              Slashes
+              赛博地图
             </a>
           </li>
           <li>
@@ -78,7 +78,7 @@ const { activeNav } = Astro.props;
                 activeNav === "search" ? "active" : ""
               } flex`}
               ariaLabel="search"
-              title="Search"
+              title="搜索"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
