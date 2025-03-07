@@ -6,14 +6,11 @@ import LinkButton from "./LinkButton.astro";
 export interface Props {
   activeNav?: "blog" | "now" | "slashes" | "search";
 }
-// 示例 URL：https://example.com/blog/post-1
-const pathname = Astro.url.pathname; // 输出 "/blog/post-1" ‌:ml-citation{ref="4" data="citationList"}
-const segments = pathname.split('/').filter(segment => segment !== ''); // ["blog", "post-1"]
-const firstLevel = segments || ''; // "blog"
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean); // ‌:ml-citation{ref="3" data="citationList"}
+const firstLevel = pathSegments || '';
+const currentPath = Astro.url.pathname; // 完整路径用于正则匹配‌:ml-citation{ref="3" data="citationList"}
 const { activeNav } = Astro.props;
-export interface Props {
-  firstLevel;
-}
+
 ---
 
 <header>
@@ -54,13 +51,13 @@ console.log({firstLevel})
 </script>
         <ul id="menu-items" class="display-none sm:flex">
           <li>
-            <a href="/blog/" class={firstLevel === "blog" ? "active" : ""}>
+            <a href="/blog/" class:list={[{ active: firstLevel === 'blog' }]}>
               所有文章
             </a>
           </li>
 
           <li>
-            <a href="/now/" class={firstLevel === "now" ? "active" : ""}>
+            <a href="/now/" class:list={[{ active: firstLevel === 'now' }]}>
               当下状态
             </a>
           </li>
@@ -76,7 +73,7 @@ console.log({firstLevel})
             </a>
           </li>
           <li>
-            <a href="/slash/" class={firstLevel === "slashes" ? "active" : ""}>
+            <a href="/slash/" class:list={[{ active: firstLevel === 'slashes' }]}>
               赛博地图
             </a>
           </li>
