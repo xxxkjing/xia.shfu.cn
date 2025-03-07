@@ -24,7 +24,7 @@
   
 @font-face {
   font-family: "ChineseFont";
-  src: url('/assets/fonts/Mono-Regular.woff2') format('woff2');
+  src: url('/Mono-Regular.woff2') format('woff2');
   font-weight: 100 900; /* 根据实际字体权重设置 */
   font-style: normal;
   font-display: swap;
