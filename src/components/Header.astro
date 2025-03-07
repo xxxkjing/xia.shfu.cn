@@ -7,7 +7,7 @@ export interface Props {
   activeNav?: "blog" | "now" | "slashes" | "search";
 }
 // 示例 URL：https://example.com/blog/post-1
-const pathname = Astro.request.url.pathname; // 输出 "/blog/post-1" ‌:ml-citation{ref="4" data="citationList"}
+const pathname = Astro.url.pathname; // 输出 "/blog/post-1" ‌:ml-citation{ref="4" data="citationList"}
 const segments = pathname.split('/').filter(segment => segment !== ''); // ["blog", "post-1"]
 const firstLevel = segments || ''; // "blog"
 const { activeNav } = Astro.props;
