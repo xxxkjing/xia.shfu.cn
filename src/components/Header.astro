@@ -6,11 +6,9 @@ import LinkButton from "./LinkButton.astro";
 export interface Props {
   activeNav?: "blog" | "now" | "slashes" | "search";
 }
-const pathSegments = Astro.url.pathname.split('/').filter(Boolean); // ‌:ml-citation{ref="3" data="citationList"}
-const firstLevel = pathSegments || '';
-const currentPath = Astro.url.pathname; // 完整路径用于正则匹配‌:ml-citation{ref="3" data="citationList"}
-const { activeNav } = Astro.props;
 
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
+const [firstLevel = ''] = pathSegments; // 正确获取第一级路径名称‌:ml-citation{ref="1,2" data="citationList"}
 ---
 
 <header>
