@@ -8,6 +8,7 @@ import type { CollectionEntry } from "astro:content";
 import { slugifyStr } from "@utils/slugify";
 import ShareLinks from "@components/ShareLinks.astro";
 import { SITE } from "@config";
+import TOC from '../components/TOC.astro';
 
 export interface Props {
   post: CollectionEntry<"blog">;
@@ -184,6 +185,7 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
         )
       }
     </div>
+    <TOC />
     <hr class="my-6 border-dashed" />
     <section
       class="mt-4 flex items-center rounded-md border border-purple-500 p-2"
@@ -220,12 +222,12 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
             </div>
           </div>
           <p class="text-sm text-skin-base opacity-80">
-            I'm a software developer and technical writer. On this blog, I share my learnings about both fields. Recently, I have begun exploring other topics, so don't be surprised if you find something new here.
+            不务正业的高中生
           </p>
           <p
             class="flex items-center space-x-2 text-sm text-skin-base opacity-80"
           >
-            Currently, working as a documentation lead at Expo.
+            目前正在玩Nethack
           </p>
         </section>
       </div>
