@@ -27,7 +27,7 @@ let totalPostsCount = posts.length
   <Header activeNav="blog" />
   <Main
     pageTitle="Blog"
-    pageDesc=`This site is a collection of most of the posts (${totalPostsCount}) I've written.`
+    pageDesc=`这是我写过的所有文章(${totalPostsCount}), Bon Appétit`
   >
     <ul>
       {tags.map(({ tag }) => <Tag {tag} size="sm" />)}
@@ -40,6 +40,8 @@ let totalPostsCount = posts.length
       }
     </ul>
   </Main>
+
+
 
   <Pagination
     {currentPage}
