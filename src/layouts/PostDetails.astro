@@ -8,6 +8,7 @@ import type { CollectionEntry } from "astro:content";
 import { slugifyStr } from "@utils/slugify";
 import ShareLinks from "@components/ShareLinks.astro";
 import { SITE } from "@config";
+import Comment from "@components/Comments.astro";
 
 export interface Props {
   post: CollectionEntry<"blog">;
@@ -57,7 +58,7 @@ const prevPost = currentPostIndex !== 0 ? allPosts[currentPostIndex - 1] : null;
 const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostIndex + 1] : null;
 
 ---
-
+<Comment />
 <Layout {...layoutProps}>
   <Header />
 
