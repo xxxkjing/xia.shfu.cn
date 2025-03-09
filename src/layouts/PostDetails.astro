@@ -29,7 +29,7 @@ const {
   readingTime,
 } = post.data;
 
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 
 const ogImageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src;
 const ogUrl = new URL(
@@ -96,6 +96,7 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
         </ul>
       </div>
     </div>
+{!!headings.length && <TOC headings={headings} />}
     <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
       <!-- <div class="flex items-center justify-center">
         <div id="carbonads" />
