@@ -8,7 +8,7 @@ import type { CollectionEntry } from "astro:content";
 import { slugifyStr } from "@utils/slugify";
 import ShareLinks from "@components/ShareLinks.astro";
 import { SITE } from "@config";
-import TOC from '../components/Toc.astro';
+import TOC from '../components/TOC.astro';
 
 export interface Props {
   post: CollectionEntry<"blog">;
@@ -29,7 +29,7 @@ const {
   readingTime,
 } = post.data;
 
-const { Content, headings } = await post.render();
+const { Content } = await post.render();
 
 const ogImageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src;
 const ogUrl = new URL(
@@ -96,7 +96,6 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
         </ul>
       </div>
     </div>
-{!!headings.length && <TOC headings={headings} />}
     <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
       <!-- <div class="flex items-center justify-center">
         <div id="carbonads" />
