@@ -8,7 +8,6 @@ import type { CollectionEntry } from "astro:content";
 import { slugifyStr } from "@utils/slugify";
 import ShareLinks from "@components/ShareLinks.astro";
 import { SITE } from "@config";
-import Comment from "@components/Comments.astro";
 
 export interface Props {
   post: CollectionEntry<"blog">;
@@ -58,7 +57,7 @@ const prevPost = currentPostIndex !== 0 ? allPosts[currentPostIndex - 1] : null;
 const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostIndex + 1] : null;
 
 ---
-<Comment />
+
 <Layout {...layoutProps}>
   <Header />
 
@@ -185,6 +184,22 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
         )
       }
     </div>
+<script src="https://giscus.app/client.js"
+        data-repo="xxxkjing/giscus-comment"
+        data-repo-id="R_kgDOOA-quA"
+        data-category="General"
+        data-category-id="DIC_kwDOOA-quM4CnbUk"
+        data-mapping="og:title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
     <hr class="my-6 border-dashed" />
     <section
       class="mt-4 flex items-center rounded-md border border-purple-500 p-2"
@@ -197,27 +212,14 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
               <span class="text-sm italic text-[#8A55F7]">作者</span>
             </div>
             <div class="flex space-x-2">
-              <a
-                href="https://github.com/sponsors/xxxkjing?frequency=one-time"
-                target="_blank"
-                class="text-xs font-bold text-[#8A55F7] hover:underline"
-              >
-                Buy me coffee
-              </a>
-              <!-- <a
-                href="https://github.com/xxxkjing"
+             <a
+                href="https://dgithub.xyz/xxxkjing"
                 target="_blank"
                 class="text-xs font-bold text-purple-500 hover:underline"
               >
                 GitHub
               </a>
-              <a
-                href="https://x.com/xxxkjing"
-                target="_blank"
-                class="text-xs font-bold text-purple-500 hover:underline"
-              >
-                X
-              </a> -->
+             
             </div>
           </div>
           <p class="text-sm text-skin-base opacity-80">
