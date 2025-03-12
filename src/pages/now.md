@@ -1,6 +1,6 @@
 ---
 layout: ../layouts/GenericLayout.astro
-title: 'Now'
+title: '当下状态'
 ---
 
 _上次更新：20250311_
