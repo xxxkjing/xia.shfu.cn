@@ -13,7 +13,7 @@ export const SITE: Site = {
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
   showArchives: true,
   editPost: {
-    url: "https://dgithub.xyz/xxxkjing/astro-paper/edit/main/src/content/blog",
+    url: "https://github.xyz/xxxkjing/astro-paper/edit/main/src/content/blog",
     text: "Suggest Changes",
     appendFilePath: true,
   },
@@ -34,8 +34,8 @@ export const LOGO_IMAGE = {
 export const SOCIALS: SocialObjects = [
   {
     name: "Github",
-    href: "https://github.com/xxxkjing",
-    linkTitle: ` ${SITE.title} on Github`,
+    href: "https://dgithub.xyz/xxxkjing",
+    linkTitle: `在GitHub上查看TA`,
     active: true,
   },
   {
@@ -59,7 +59,7 @@ export const SOCIALS: SocialObjects = [
   {
     name: "Mail",
     href: "xkjing@outlook.com",
-    linkTitle: `Send an email to ${SITE.title}`,
+    linkTitle: `给TA发邮件`,
     active: true,
   },
   {
