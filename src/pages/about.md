@@ -1,6 +1,6 @@
 ---
 layout: ../layouts/AboutLayout.astro
-title: "我是谁"
+title: "关于TA"
 ---
 
 作者是XiaJing，在校高中生，现在学业繁忙，有空会不定期更新博客。
