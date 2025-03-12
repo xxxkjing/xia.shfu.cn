@@ -1,6 +1,6 @@
 ---
 layout: ../layouts/GenericLayout.astro
-title: 'Slashes'
+title: '赛博地图'
 ---
 
 赛博网站地图
