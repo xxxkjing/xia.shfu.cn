@@ -34,7 +34,7 @@ export const LOGO_IMAGE = {
 export const SOCIALS: SocialObjects = [
   {
     name: "Github",
-    href: "https://dgithub.xyz/xxxkjing",
+    href: "https://github.xyz/xxxkjing",
     linkTitle: `在GitHub上查看TA`,
     active: true,
   },
@@ -58,7 +58,7 @@ export const SOCIALS: SocialObjects = [
   },
   {
     name: "Mail",
-    href: "xkjing@outlook.com",
+    href: "mailto:xkjing@outlook.com",
     linkTitle: `给TA发邮件`,
     active: true,
   },
