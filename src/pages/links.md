@@ -1,14 +1,8 @@
 ---
 layout: ../layouts/LinksLayout.astro
-title: 'All Links'
+title: '链接'
 ---
 
-Places to find me on the internet:
+> 记录一下常用的一些奇怪小链接
 
-- [GitHub](https://github.com/amandeepmittal)
-- [Twitter](https://x.com/amanhimself)
-- [LinkedIn](https://www.linkedin.com/in/aman-mittal-05a239117/)
-- [Goodreads](https://www.goodreads.com/author/show/17657541.Aman_Mittal)
-- [Bluesky](https://bsky.app/profile/aman.bsky.social)
-- [Medium](https://medium.com/@amanhimself)
-- [Dev.to](https://dev.to/amanhimself)
+- [一个奇怪的小网盘](https://mirror.tomys.top)
