@@ -10,3 +10,4 @@ title: '赛博地图'
 - [**/now**](/now): 我现在在做什么
 - [**/rss**](/rss.xml): RSS源
 - [**/search**](/search): 搜索文章
+- [**/links**](/links): 一些奇怪的链接
