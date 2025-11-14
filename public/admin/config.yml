@@ -2,6 +2,8 @@ backend:
   name: github
   repo: xxxkjing/astro-blog-thought-lite # TODO: Replace with your repo name
   branch: main
+  base_url: https://xia.shfu.cn
+  auth_endpoint: /api/auth
 
 i18n:
   structure: multiple_folders

@@ -75,6 +75,7 @@
 		"remark-math": "^6.0.0",
 		"remark-ruby-directive": "^0.3.0",
 		"shiki": "^3.15.0",
+		"simple-oauth2": "^5.1.0",
 		"svelte": "^5.43.5",
 		"typescript": "^5.9.3",
 		"unified": "^11.0.5",
