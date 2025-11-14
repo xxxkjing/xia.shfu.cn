@@ -37,7 +37,7 @@ import siteConfig from "./site.config";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://thought-lite.vercel.app",
+	site: "https://xia.shfu.cn",
 	trailingSlash: "never",
 	i18n: {
 		...siteConfig.i18n,

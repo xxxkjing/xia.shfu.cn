@@ -1,9 +1,35 @@
-**ThoughtLite** 是一款专注内容创作的现代化 [Astro](https://astro.build/) 主题。
+## MetaIllusion
 
-笔者此前一直使用基于 [SvelteKit](https://svelte.dev/docs/kit/introduction) 的自建主题，但迫于 i18n 处理困难、冗余功能太多、维护成本较高等因素，遂迁移至 Astro。
+关于网络名称，和 Meta 公司没有半点关系，仅仅是有次做梦想到的
 
-主题聚焦于内容相关的核心功能，旨在构建一个**高效、通透**的创作空间。
+而站点的签名：Time, Truth, and Hearts 其实是从 All These Things That I've Done 这首歌中截取的歌词，希望这个世界没有战争。
 
-同时，主题还支持**多语言切换**、**响应式布局**、**动态内容筛选**等现代特性，为用户带来流畅的使用体验。
+联系：[Email](mailto:xkjing.xiajing@gmail.com) 或者 [Github](https://github.com/xxxkjing)
+## Indie Developer 独立开发者
 
-如果您对主题有所兴趣，欢迎访问 [**GitHub 仓库**](https://github.com/tuyuritio/astro-theme-thought-lite)，了解更多信息并快速上手。
+我是一名信息技术爱好者，也是一名独立的开发者，目前就读于PFLS，正在尝试努力学习，积极向上
+
+`Python`，`JavaScript`，`H5`，`PHP`，`Linux`，`单片机` ，`C++`样样不通
+
+目前处于备战高考阶段，不一定能够长期在网络上活跃，消息会一段时间后才回，望见谅
+
+<span class="spoiler">但你可以随时来高二一班找我玩！</span>
+
+## 项目
+| **名称** | **地址** | **描述** | **语言** |
+| --- | --- | --- | --- |
+| DownList | https://github.com/xxxkjing/DownList | 无限制下载网易云音乐 | Python |
+| SoftLock | https://github.com/xxxkjing/SoftLock | 研究性学习成果，加密文件锁 | Python |
+
+<style>
+  .spoiler {
+    filter: blur(8px);
+    cursor: pointer;
+    transition: filter 0.3s ease;
+  }
+
+  .spoiler:hover {
+    filter: blur(0);
+  }
+</style>
+

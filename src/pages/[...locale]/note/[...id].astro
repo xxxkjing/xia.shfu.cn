@@ -8,6 +8,7 @@ import Icon from "$components/Icon.astro";
 import TOC from "$components/note/TOC.astro";
 import Position from "$components/Position.astro";
 import Sensitive from "$components/Sensitive.svelte";
+import Comment from "$components/Comment.astro";
 import i18nit from "$i18n";
 
 export async function getStaticPaths() {
@@ -110,5 +111,6 @@ const t = i18nit(locale);
 		</Sensitive>
 
 		<Position {locale} />
+		<Comment />
 	</main>
 </Base>

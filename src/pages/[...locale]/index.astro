@@ -1,8 +1,8 @@
 ---
 import { render, getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { Icon } from "astro-icon/components";
 import config, { monolocale } from "$config";
+import logo from "$icons/site-logo.png";
 import Time from "$utils/time";
 import Base from "$layouts/Base.astro";
 import Heatmap from "$components/Heatmap.svelte";
@@ -80,7 +80,7 @@ const { Content } = preface ? await render(preface) : ({} as any);
 	<main class="flex flex-col gap-5 sm:gap-20 flex-grow">
 		<header class="flex items-center justify-center flex-wrap-reverse grow-0.6">
 			{config.prologue && <article class="mr-a font-cursive font-thin text-size-xl sm:text-size-2xl line-height-loose whitespace-pre-line">{config.prologue}</article>}
-			<Icon name="site-logo" size={100} is:inline />
+			<img src={logo.src} alt="Site Logo" width="100" height="100" />
 		</header>
 
 		{

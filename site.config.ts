@@ -1,21 +1,21 @@
 import siteConfig from "./src/utils/config";
 
 const config = siteConfig({
-	title: "ThoughtLite",
-	prologue: "If you need a website\nthat loads fast and has great SEO, then Astro is for you.",
+	title: "MetaIllusion的博客",
+	prologue: "Time, Truth, and Hearts",
 	author: {
-		name: "Your Name",
-		email: "hi@your.mail",
-		link: "https://your.website"
+		name: "MetaIllusion",
+		email: "xkjing.xiajing@gmail.com",
+		link: "https://xia.shfu.cn"
 	},
-	description: "A modern Astro theme focused on content creation.",
+	description: "一个博客，记录一个高中生的生活",
 	copyright: {
 		type: "CC BY-NC-ND 4.0",
 		year: "2025"
 	},
 	i18n: {
-		locales: ["en", "zh-cn", "ja"],
-		defaultLocale: "en"
+		locales: ["zh-cn", "en"],
+		defaultLocale: "zh-cn"
 	},
 	feed: {
 		section: "*",
