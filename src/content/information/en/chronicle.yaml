@@ -1,0 +1,23 @@
+2025-11-06:
+  - Monolingual mode support
+2025-10-18:
+  - Content initialization script
+2025-09-02:
+  - Feed stylesheet
+2025-08-28:
+  - Sensitive content warning
+2025-01-08:
+  - Internationalization support
+2025-01-04:
+  - Atom subscription
+  - ~RSS subscription
+  - ~JSON Feed subscription
+2025-01-03:
+  - Heatmap
+  - Dynamic filtering
+2025-01-02:
+  - Notes
+  - Jottins
+  - Preface
+2025-01-01:
+  - Welcome to Astro

@@ -1,0 +1,58 @@
+about:
+  introduction: Introduction
+  roll: Link Roll
+feed:
+  address: Subscription address
+  copy:
+    failure: Copy failed, please copy the subscription address manually.
+    name: Copy
+    success: Subscription address copied to clipboard!
+  description: This page is an Atom format content subscription source.
+  last: Last updated
+  usage: >-
+    You can add the current address in any supported reader to subscribe to this
+    content and get the latest content updates in time.
+  visit: This is the feed page. Visit {title} for the full website experience.
+home:
+  heatmap:
+    empty: No words
+    jotting: '{count} jottings'
+    note: '{count} notes'
+  latest: Latest
+  prefaces: Prefaces
+jotting:
+  empty: No jottings available
+  tag: Tag
+language: English
+navigation:
+  about: About
+  home: Home
+  jotting: Jotting
+  note: Note
+  policy: Policy
+  preface: Preface
+  subscription: Subscription
+note:
+  contents: Contents
+  empty: No notes available
+  series: Series
+  tag: Tag
+  top: To Top
+read:
+  words: '{words} words'
+sensitive:
+  back: Return to list
+  continue: I understand, continue reading
+  description: >-
+    This content may contain explicit, violent, bloody, or emotionally
+    triggering material.
+  feed: >
+    <p>This content may contain explicit, violent, bloody, or emotionally
+    triggering material.</p>
+
+    <p>To read, please visit the <a href="{link}">original link</a>.</p>
+  icon: Contains sensitive content
+  title: Content Warning
+  warning: If this content might affect your mental health, please leave immediately!
+statistics: Wrote {words} words
+theme: 'Theme: ThoughtLite'
