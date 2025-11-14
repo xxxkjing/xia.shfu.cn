@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig, passthroughImageService } from "astro/config";
+import vercel from "@astrojs/vercel/serverless";
 import yaml from "@rollup/plugin-yaml";
 import sitemap from "@astrojs/sitemap";
 import svelte from "@astrojs/svelte";
@@ -37,6 +38,8 @@ import siteConfig from "./site.config";
 
 // https://astro.build/config
 export default defineConfig({
+	output: "server",
+	adapter: vercel(),
 	site: "https://xia.shfu.cn",
 	trailingSlash: "never",
 	i18n: {

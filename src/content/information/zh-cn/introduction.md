@@ -13,7 +13,7 @@
 
 目前处于备战高考阶段，不一定能够长期在网络上活跃，消息会一段时间后才回，望见谅
 
-<span class="spoiler">但你可以随时来高二一班找我玩！</span>
+!!但你可以随时来高二一班找我玩！!!
 
 ## 项目
 | **名称** | **地址** | **描述** | **语言** |
@@ -21,15 +21,4 @@
 | DownList | https://github.com/xxxkjing/DownList | 无限制下载网易云音乐 | Python |
 | SoftLock | https://github.com/xxxkjing/SoftLock | 研究性学习成果，加密文件锁 | Python |
 
-<style>
-  .spoiler {
-    filter: blur(8px);
-    cursor: pointer;
-    transition: filter 0.3s ease;
-  }
-
-  .spoiler:hover {
-    filter: blur(0);
-  }
-</style>
 
