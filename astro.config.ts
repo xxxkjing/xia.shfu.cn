@@ -8,7 +8,6 @@ import UnoCSS from "unocss/astro";
 import swup from "@swup/astro";
 import icon from "astro-icon";
 import githubLight from "shiki/themes/github-light.mjs";
-import keystatic from "@keystatic/astro";
 
 import GFM from "remark-gfm";
 import ins from "remark-ins";
@@ -110,7 +109,6 @@ export default defineConfig({
 		plugins: [yaml()]
 	},
 	integrations: [
-		keystatic(),
 		svelte(),
 		sitemap(),
 		swup({
