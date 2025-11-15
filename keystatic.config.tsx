@@ -6,18 +6,20 @@ export default config({
 			name: "MetaIllusion的博客"
 		}
 	},
-	storage: {
-		kind: "github",
-		repo: {
-			owner : "xxxkjing",
-			name : "astro-blog-thought-lite"
-		}
-	},
+	storage: import.meta.env.DEV
+		? { kind: "local" }
+		: {
+				kind: "github",
+				repo: {
+					owner: "xxxkjing",
+					name: "astro-blog-thought-lite"
+				}
+			},
 	collections: {
 		note: collection({
 			label: "笔记 (Notes)",
 			slugField: "title",
-			path: "src/content/note/zh-cn/**/*",
+			path: "src/content/note/zh-cn/*",
 			format: { data: "yaml", contentField: "content" },
 			schema: {
 				title: fields.slug({
