@@ -80,6 +80,7 @@ pnpm dev
 | `pnpm install` | 安装项目依赖 |
 | `pnpm new` | 创建新的内容文件 |
 | `pnpm dev` | 启动本地开发服务器（默认：`http://localhost:4321`） |
+| `pnpm cms` | 启动 Keystatic CMS 界面（默认：`http://localhost:4321/keystatic`）|
 | `pnpm check` | 运行 Astro 类型检查 |
 | `pnpm build` | 构建生产版本 |
 | `pnpm preview` | 预览构建后的站点 |
@@ -118,6 +119,18 @@ pnpm install
 
 详情请参阅[内容创作指南](src/content/note/zh-cn/content.md)。
 
+### 📝 使用 Keystatic CMS 管理内容
+
+项目已集成 **Keystatic**，一个现代的无头 CMS 系统。使用 CMS 可以通过可视化界面管理所有内容，支持实时预览和文件管理。
+
+```bash
+pnpm cms
+```
+
+然后在浏览器中访问 `http://localhost:4321/keystatic` 使用 CMS 编辑内容。
+
+更多详情请参阅 [Keystatic CMS 集成指南](KEYSTATIC_INTEGRATION.md) 和 [官方文档](https://keystatic.com/docs/)。
+
 ## 🤝 贡献
 
 欢迎并感谢所有形式的贡献！
@@ -134,6 +147,7 @@ pnpm install
 - **核心框架** - [Astro](https://astro.build/)
 - **核心语言** - [TypeScript](https://www.typescriptlang.org/)
 - **UI 组件** - [Svelte](https://svelte.dev/)
+- **内容管理** - [Keystatic](https://keystatic.com/)
 - **CSS 引擎** - [UnoCSS](https://unocss.dev/)
 - **CSS 预处理器** - [Less](https://lesscss.org/)
 - **图标** - [Iconify](https://iconify.design/)
