@@ -1,0 +1,34 @@
+---
+import { getCollection } from "astro:content";
+import Time from "$utils/time";
+import Base from "$layouts/Base.astro";
+
+const prefaces = (
+	await getCollection("preface", preface => {
+		// Extract language and ID from file path structure
+		const [language, id] = preface.id.split("/");
+		preface.id = id;
+
+		return language === "zh-cn";
+	})
+).sort((a, b) => b.data.timestamp.getTime() - a.data.timestamp.getTime());
+---
+
+<Base title="序言">
+	<main class="flex flex-col">
+		<h2>序言</h2>
+		<ul class="flex flex-col list-none">
+			{
+				prefaces.map(preface => [
+					<hr class="my-5 b-b b-b-solid b-primary" />,
+					<li>
+						<time datetime={preface.data.timestamp.toISOString()} class="block mb-5 font-bold text-5">
+							{Time.locale(preface.data.timestamp, "zh-cn")}
+						</time>
+						<article class="markdown" set:html={preface.rendered?.html} />
+					</li>
+				])
+			}
+		</ul>
+	</main>
+</Base>

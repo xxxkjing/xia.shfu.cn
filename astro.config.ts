@@ -8,6 +8,7 @@ import UnoCSS from "unocss/astro";
 import swup from "@swup/astro";
 import icon from "astro-icon";
 import githubLight from "shiki/themes/github-light.mjs";
+import keystatic from "@keystatic/astro";
 
 import GFM from "remark-gfm";
 import ins from "remark-ins";
@@ -39,16 +40,9 @@ import siteConfig from "./site.config";
 // https://astro.build/config
 export default defineConfig({
 	output: "server",
-	adapter: vercel(),
+	adapter: vercel({}),
 	site: "https://xia.shfu.cn",
 	trailingSlash: "never",
-	i18n: {
-		...siteConfig.i18n,
-		routing: {
-			redirectToDefaultLocale: false,
-			prefixDefaultLocale: false
-		}
-	},
 	image: {
 		service: passthroughImageService()
 	},
@@ -116,6 +110,7 @@ export default defineConfig({
 		plugins: [yaml()]
 	},
 	integrations: [
+		keystatic(),
 		svelte(),
 		sitemap(),
 		swup({

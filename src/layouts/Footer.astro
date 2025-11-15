@@ -1,13 +1,8 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
-import { getRelativeLocaleUrl } from "astro:i18n";
-import { monolocale } from "$config";
 import Icon from "$components/Icon.astro";
-import i18nit from "$i18n";
 
-let { locale, author, copyright } = Astro.props;
-
-const t = i18nit(locale);
+let { author, copyright } = Astro.props;
 
 let ccURL: string;
 let ccLabel: string;
@@ -69,7 +64,7 @@ if (copyright.type === "CC0 1.0") {
 const notes = await getCollection("note", note => {
 	// Filter by publication status and locale
 	let published = !note.data.draft;
-	let localed = monolocale || note.id.split("/")[0] === locale;
+	let localed = note.id.startsWith("zh-cn/");
 
 	return published && localed;
 });
@@ -83,7 +78,7 @@ const noteWords = (await Promise.all(notes.map(async note => (await render(note)
 const jottings = await getCollection("jotting", jotting => {
 	// Filter by publication status and locale
 	let published = !jotting.data.draft;
-	let localed = monolocale || jotting.id.split("/")[0] === locale;
+	let localed = jotting.id.startsWith("zh-cn/");
 
 	return published && localed;
 });
@@ -98,7 +93,7 @@ const jottingWords = (await Promise.all(jottings.map(async jotting => (await ren
 const totalWords = noteWords + jottingWords;
 
 // Check if policy file exists for current locale
-const policy = await getEntry("information", `${locale}/policy`);
+const policy = await getEntry("information", "zh-cn/policy");
 ---
 
 <footer class="flex flex-col sm:flex-row items-center justify-between gap-2 mt-8 mb-5 sm:mb-3 text-size-sm font-mono">
@@ -127,12 +122,12 @@ const policy = await getEntry("information", `${locale}/policy`);
 			{ccIcons.map(icon => <Icon name={icon} />)}
 		</a>
 		<span>·</span>
-		<span class="contents"><Icon name="lucide:activity" title={t("statistics", { words: totalWords })} /></span>
+		<span class="contents"><Icon name="lucide:activity" title={`总计 ${totalWords} 字`} /></span>
 		{
 			policy && [
 				<span>·</span>,
-				<a href={getRelativeLocaleUrl(locale, "/policy")} aria-label="Policy" class="inline-flex">
-					<Icon name="lucide:scale" title={t("navigation.policy")} />
+				<a href="/policy" aria-label="Policy" class="inline-flex">
+					<Icon name="lucide:scale" title="隐私政策" />
 				</a>
 			]
 		}
@@ -142,6 +137,6 @@ const policy = await getEntry("information", `${locale}/policy`);
 		<a href="https://astro.build/" aria-label="Astro" target="_blank" class="inline-flex"><Icon name="simple-icons:astro" /></a>
 		<a href="https://svelte.dev/" aria-label="Svelte" target="_blank" class="inline-flex"><Icon name="simple-icons:svelte" /></a>
 		<span>·</span>
-		<a href="https://github.com/xxxkjing" aria-label="Theme" target="_blank" class="inline-flex"><Icon name="simple-icons:github" title={t("theme")} inline /></a>
+		<a href="https://github.com/xxxkjing" aria-label="Theme" target="_blank" class="inline-flex"><Icon name="simple-icons:github" title="主题" inline /></a>
 	</code>
 </footer>

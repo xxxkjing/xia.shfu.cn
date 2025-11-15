@@ -1,14 +1,10 @@
 <script lang="ts">
-import { getRelativeLocaleUrl } from "astro:i18n";
 import { onMount, type Snippet } from "svelte";
 import { flip } from "svelte/animate";
 import { fade } from "svelte/transition";
-import { monolocale } from "$config";
 import Time from "$utils/time";
-import i18nit from "$i18n";
 
 let {
-	locale,
 	notes,
 	series: seriesList,
 	tags: tagList,
@@ -18,13 +14,10 @@ let {
 	right,
 	dots
 }: {
-	locale: string;
 	notes: any[];
 	series: string[];
 	tags: string[];
 } & { [key: string]: Snippet } = $props();
-
-const t = i18nit(locale);
 
 let initial = $state(false); // Track initial load to prevent unexpected effects
 let series: string | null = $state(null);
@@ -118,7 +111,7 @@ onMount(() => {
 						{#if note.data.top > 0}<span>{@render top()}</span>{/if}
 						{#if note.data.sensitive}<span>{@render sensitive()}</span>{/if}
 						{#if note.data.series}<button onclick={() => chooseSeries(note.data.series, true)}>{note.data.series}</button><b>|</b>{/if}
-						<a href={getRelativeLocaleUrl(locale, `/note/${monolocale ? note.id : note.id.split("/").slice(1).join("/")}`)} class="link">{note.data.title}</a>
+						<a href={`/note/${note.id.split("/").slice(1).join("/")}`} class="link">{note.data.title}</a>
 					</div>
 					<time datetime={note.data.timestamp.toISOString()} class="font-mono text-2.6 c-remark">{Time(note.data.timestamp)}</time>
 				</div>
@@ -129,7 +122,7 @@ onMount(() => {
 				</span>
 			</section>
 		{:else}
-			<div class="pt-10vh text-center c-secondary font-bold text-xl">{t("note.empty")}</div>
+			<div class="pt-10vh text-center c-secondary font-bold text-xl">没有找到任何笔记</div>
 		{/each}
 
 		{#if pages > 1}
@@ -153,7 +146,7 @@ onMount(() => {
 
 	<aside class="sm:flex-basis-200px flex flex-col gap-5">
 		<section>
-			<h3>{t("note.series")}</h3>
+			<h3>系列</h3>
 			<p>
 				{#each seriesList as seriesItem (seriesItem)}
 					<button class:selected={seriesItem == series} onclick={() => chooseSeries(seriesItem)}>{seriesItem}</button>
@@ -162,7 +155,7 @@ onMount(() => {
 		</section>
 
 		<section>
-			<h3>{t("note.tag")}</h3>
+			<h3>标签</h3>
 			<p>
 				{#each tagList as tag (tag)}
 					<button class:selected={tags.includes(tag)} onclick={() => switchTag(tag)}>{tag}</button>

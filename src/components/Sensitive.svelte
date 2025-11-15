@@ -1,12 +1,8 @@
 <script lang="ts">
-import { getRelativeLocaleUrl } from "astro:i18n";
 import type { Snippet } from "svelte";
 import { fade } from "svelte/transition";
-import i18nit from "$i18n";
 
-let { locale, sensitive = false, back, children }: { locale: string; sensitive: boolean; back: string; children: Snippet } = $props();
-
-const t = i18nit(locale);
+let { sensitive = false, back, children }: { sensitive: boolean; back: string; children: Snippet } = $props();
 
 if (sensitive) {
 	$effect(() => {
@@ -17,17 +13,17 @@ if (sensitive) {
 
 {#if sensitive}
 	<div transition:fade={{ duration: 150 }} class="flex flex-col items-center justify-end gap-6">
-		<h2>{t("sensitive.title")}</h2>
+		<h2>敏感内容</h2>
 		<div class="flex flex-col items-center justify-end gap-3">
-			<p>{t("sensitive.description")}</p>
-			<p>{t("sensitive.warning")}</p>
+			<p>此内容被标记为敏感，可能包含令人不适的元素。</p>
+			<p>请确认您已年满十八周岁，并愿意承担相应风险。</p>
 		</div>
 		<div class="flex gap-3">
 			<button class="font-bold c-background bg-red-5 py-1 px-2 rd-md" onclick={() => (sensitive = false)}>
-				{t("sensitive.continue")}
+				继续访问
 			</button>
-			<a href={getRelativeLocaleUrl(locale, back)} class="flex items-center font-bold c-background bg-secondary py-1 px-2 rd-md">
-				{t("sensitive.back")}
+			<a href={back} class="flex items-center font-bold c-background bg-secondary py-1 px-2 rd-md">
+				返回
 			</a>
 		</div>
 	</div>

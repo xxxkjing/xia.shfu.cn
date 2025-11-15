@@ -1,5 +1,4 @@
 ---
-import { getRelativeLocaleUrl } from "astro:i18n";
 import { Icon } from "astro-icon/components";
 import config from "$config";
 import App from "$layouts/App.astro";
@@ -12,7 +11,7 @@ import "medium-zoom/dist/style.css";
 
 let route = Astro.url.pathname;
 
-const { locale = config.i18n.defaultLocale, title: subtitle, description = config.description, article } = Astro.props;
+const { title: subtitle, description = config.description, article } = Astro.props;
 const title = config.title;
 ---
 
@@ -51,9 +50,9 @@ const title = config.title;
 	<div class="flex flex-col mx-a px-3 w-[min(100%,1000px)]">
 		<div id="body" class="flex flex-col min-h-screen">
 			<header class="sticky top-0 flex items-center justify-between pt-3 pb-1 mb-4 bg-background z-2 sm:(static pb-12)">
-				<a href={getRelativeLocaleUrl(locale)} class="text-size-lg sm:text-size-2xl font-bold">{title}</a>
+				<a href="/" class="text-size-lg sm:text-size-2xl font-bold">{title}</a>
 
-				<Navigator {locale} {route} client:load>
+				<Navigator {route} client:load>
 					<Icon name="lucide:tent" slot="home" is:inline />
 					<Icon name="lucide:list" slot="note" />
 					<Icon name="lucide:at-sign" slot="about" />
@@ -70,6 +69,6 @@ const title = config.title;
 			<slot />
 		</div>
 
-		<Footer {locale} author={config.author} copyright={config.copyright} />
+		<Footer author={config.author} copyright={config.copyright} />
 	</div>
 </App>

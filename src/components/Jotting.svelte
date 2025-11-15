@@ -1,23 +1,9 @@
 <script lang="ts">
-import { getRelativeLocaleUrl } from "astro:i18n";
 import { onMount, type Snippet } from "svelte";
 import { flip } from "svelte/animate";
 import { fade } from "svelte/transition";
-import { monolocale } from "$config";
-import i18nit from "$i18n";
 
-let {
-	locale,
-	jottings,
-	tags: tagList,
-	top,
-	sensitive,
-	left,
-	right,
-	dots
-}: { locale: string; jottings: any[]; tags: string[] } & { [key: string]: Snippet } = $props();
-
-const t = i18nit(locale);
+let { jottings, tags: tagList, top, sensitive, left, right, dots }: { jottings: any[]; tags: string[] } & { [key: string]: Snippet } = $props();
 
 let initial = $state(false); // Track initial load to prevent unexpected effects
 let tags: string[] = $state([]);
@@ -88,7 +74,7 @@ onMount(() => {
 					<span class="flex items-center gap-1">
 						{#if jotting.data.top > 0}<span>{@render top()}</span>{/if}
 						{#if jotting.data.sensitive}<span>{@render sensitive()}</span>{/if}
-						<a href={getRelativeLocaleUrl(locale, `/jotting/${monolocale ? jotting.id : jotting.id.split("/").slice(1).join("/")}`)} class="c-primary font-600 link">{jotting.data.title}</a>
+						<a href={`/jotting/${jotting.id.split("/").slice(1).join("/")}`} class="c-primary font-600 link">{jotting.data.title}</a>
 					</span>
 					<span class="flex gap-1">
 						{#each jotting.data.tags as tag}
@@ -97,7 +83,7 @@ onMount(() => {
 					</span>
 				</section>
 			{:else}
-				<div class="col-span-2 pt-10vh text-center c-secondary font-bold text-xl">{t("jotting.empty")}</div>
+				<div class="col-span-2 pt-10vh text-center c-secondary font-bold text-xl">没有找到任何随笔</div>
 			{/each}
 		</header>
 
@@ -121,7 +107,7 @@ onMount(() => {
 	</article>
 	<aside class="sm:flex-basis-200px flex flex-col gap-5">
 		<section>
-			<h3>{t("jotting.tag")}</h3>
+			<h3>标签</h3>
 			<p>
 				{#each tagList as tag (tag)}
 					<button class:selected={tags.includes(tag)} onclick={() => switchTag(tag)}>{tag}</button>

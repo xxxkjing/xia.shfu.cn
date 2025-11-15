@@ -1,35 +1,16 @@
 <script lang="ts">
-import { getRelativeLocaleUrl } from "astro:i18n";
 import { onMount, type Snippet } from "svelte";
-import config, { monolocale } from "$config";
-import i18nit from "$i18n";
 import ThemeSwitcher from "./ThemeSwitcher.svelte";
-import Menu from "./Menu.svelte";
 
-let {
-	locale,
-	route,
-	home,
-	note,
-	jotting,
-	about,
-	globe,
-	rss,
-	sun,
-	moon,
-	bars,
-	close
-}: { locale: string; route: string } & { [key: string]: Snippet } = $props();
-
-const t = i18nit(locale);
+let { route, home, note, jotting, about, rss, sun, moon, bars, close }: { route: string } & { [key: string]: Snippet } = $props();
 
 // Define home route and navigation routes configuration
-const homeRoute = getRelativeLocaleUrl(locale);
+const homeRoute = "/";
 const routes: { path: string; extra?: string[]; icon: Snippet; label: string }[] = [
-	{ label: t("navigation.home"), path: homeRoute, extra: [getRelativeLocaleUrl(locale, "/preface")], icon: home },
-	{ label: t("navigation.note"), path: getRelativeLocaleUrl(locale, "/note"), icon: note },
-	{ label: t("navigation.jotting"), path: getRelativeLocaleUrl(locale, "/jotting"), icon: jotting },
-	{ label: t("navigation.about"), path: getRelativeLocaleUrl(locale, "/about"), icon: about }
+	{ label: "首页", path: homeRoute, extra: ["/preface"], icon: home },
+	{ label: "笔记", path: "/note", icon: note },
+	{ label: "随笔", path: "/jotting", icon: jotting },
+	{ label: "关于", path: "/about", icon: about }
 ];
 
 /**
@@ -49,9 +30,6 @@ function active(path: string, extra?: string[]) {
 // Control mobile menu visibility state
 let menu: boolean = $state(false);
 let navigator: HTMLElement | undefined = $state();
-
-// Extract path without locale prefix for language switching
-let path: string | undefined = $derived(route.slice(`/${locale === config.i18n.defaultLocale ? "" : locale}`.length) || undefined);
 
 onMount(() => {
 	// Close mobile menu when any navigation link is clicked
@@ -90,18 +68,7 @@ onMount(() => {
 	<footer class="flex flex-col gap-2 sm:gap-5 sm:(flex-row gap-7)">
 		<ThemeSwitcher {sun} {moon} />
 
-		<a href={getRelativeLocaleUrl(locale, "/feed.xml")} target="_blank" aria-label="Subscription" class="inline-flex">{@render rss()}</a>
-
-		{#if !monolocale}
-			<Menu label="Language switcher">
-				{#snippet trigger()}{@render globe()}{/snippet}
-				<div data-no-swup class="contents">
-					{#each config.i18n.locales as locale}
-						<a href={getRelativeLocaleUrl(locale as string, path)} lang={locale} aria-label={i18nit(locale)("language")}>{i18nit(locale)("language")}</a>
-					{/each}
-				</div>
-			</Menu>
-		{/if}
+		<a href="/feed.xml" target="_blank" aria-label="Subscription" class="inline-flex">{@render rss()}</a>
 	</footer>
 </nav>
 

@@ -1,14 +1,9 @@
 <script lang="ts">
-import { getRelativeLocaleUrl } from "astro:i18n";
 import Time from "$utils/time";
-import i18nit from "$i18n";
 
 let { locale, notes, jottings, weeks = 20 }: { locale: string; notes: any[]; jottings: any[]; weeks: number } = $props();
 
 const days = weeks * 7; // Convert weeks to days for heatmap
-
-// Initialize translation function for current locale
-const t = i18nit(locale);
 
 // Get this week's Saturday as reference point for calculating relative dates
 const now = new Date();
@@ -52,23 +47,23 @@ jottings.forEach(jotting => {
 				<time class="font-bold">{Time.date.locale(day.date, locale)}</time>
 				{#if number > 0}
 					{#if day.notes.length > 0}
-						<p class="my-1">{t("home.heatmap.note", { count: day.notes.length })}：</p>
+						<p class="my-1">笔记 ({day.notes.length})：</p>
 						<ul class="flex flex-col gap-0.5">
 							{#each day.notes as note}
-								<a href={getRelativeLocaleUrl(locale, `/note/${note.id.split("/").slice(1).join("/")}`)} aria-label={note.data.title} class="ml-1 link">{note.data.title}</a>
+								<a href={`/note/${note.id.split("/").slice(1).join("/")}`} aria-label={note.data.title} class="ml-1 link">{note.data.title}</a>
 							{/each}
 						</ul>
 					{/if}
 					{#if day.jottings.length > 0}
-						<p class="my-1">{t("home.heatmap.jotting", { count: day.jottings.length })}：</p>
+						<p class="my-1">随笔 ({day.jottings.length})：</p>
 						<ul class="flex flex-col gap-0.5">
 							{#each day.jottings as jotting}
-								<a href={getRelativeLocaleUrl(locale, `/jotting/${jotting.id.split("/").slice(1).join("/")}`)} aria-label={jotting.data.title} class="ml-1 link">{jotting.data.title}</a>
+								<a href={`/jotting/${jotting.id.split("/").slice(1).join("/")}`} aria-label={jotting.data.title} class="ml-1 link">{jotting.data.title}</a>
 							{/each}
 						</ul>
 					{/if}
 				{:else}
-					<p class="mt-1">{t("home.heatmap.empty")}</p>
+					<p class="mt-1">今天没有发布任何内容</p>
 				{/if}
 			</div>
 		</figure>
