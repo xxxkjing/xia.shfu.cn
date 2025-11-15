@@ -6,7 +6,7 @@ const config = {
 		email: "xkjing.xiajing@gmail.com",
 		link: "https://xia.shfu.cn"
 	},
-	description: "一个博客，记录一个高中生的生活",
+	description: "用博客，记录一个高中生的生活",
 	copyright: {
 		type: "CC BY-NC-ND 4.0",
 		year: "2025"
