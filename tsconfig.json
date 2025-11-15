@@ -1,6 +1,6 @@
 {
 	"extends": "astro/tsconfigs/strict",
-	"include": [".astro/types.d.ts", "**/*", ".vscode/config.schema.json"],
+	"include": [".astro/types.d.ts", "**/*", ".vscode/config.schema.json", "keystatic.config.tsx"],
 	"exclude": ["dist"],
 	"compilerOptions": {
 		"baseUrl": ".",
@@ -12,6 +12,8 @@
 			"$icons/*": ["src/icons/*"],
 			"$layouts/*": ["src/layouts/*"],
 			"$styles/*": ["src/styles/*"]
-		}
+		},
+		"jsx": "react-jsx",
+		"jsxImportSource": "react"
 	}
 }

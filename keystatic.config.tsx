@@ -13,7 +13,7 @@ export default config({
 		note: collection({
 			label: "笔记 (Notes)",
 			slugField: "title",
-			path: "src/content/note/zh-cn/*",
+			path: "src/content/note/zh-cn/**/*",
 			format: { data: "yaml", contentField: "content" },
 			schema: {
 				title: fields.slug({
@@ -79,7 +79,7 @@ export default config({
 		jotting: collection({
 			label: "随笔 (Jottings)",
 			slugField: "title",
-			path: "src/content/jotting/zh-cn/*",
+			path: "src/content/jotting/zh-cn/**/*",
 			format: { data: "yaml", contentField: "content" },
 			schema: {
 				title: fields.slug({
@@ -137,7 +137,7 @@ export default config({
 		preface: collection({
 			label: "序言 (Preface)",
 			slugField: "slug",
-			path: "src/content/preface/zh-cn/*",
+			path: "src/content/preface/zh-cn/**/*",
 			format: { data: "yaml", contentField: "content" },
 			schema: {
 				slug: fields.slug({
@@ -167,7 +167,7 @@ export default config({
 		information: collection({
 			label: "信息 (Information)",
 			slugField: "slug",
-			path: "src/content/information/zh-cn/*",
+			path: "src/content/information/zh-cn/**/*",
 			format: { data: "yaml", contentField: "content" },
 			schema: {
 				slug: fields.slug({
