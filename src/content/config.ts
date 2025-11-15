@@ -10,7 +10,7 @@ const note = defineCollection({
 	loader: glob({ pattern: ["**/*.md", "!**/_*.md", "!**/_*/*.md"], base: "./src/content/note" }),
 	schema: z.object({
 		title: z.string(), // Post title (required)
-		timestamp: z.date(), // Publication date (required)
+		timestamp: z.union([z.date(), z.string().transform(str => new Date(str))]), // Publication date (required)
 		series: z.string().optional(), // Series name for grouped posts
 		tags: z.array(z.string()).optional(), // Array of topic tags
 		description: z.string().optional(), // Post description/excerpt
@@ -30,7 +30,7 @@ const jotting = defineCollection({
 	loader: glob({ pattern: ["**/*.md", "!**/_*.md", "!**/_*/*.md"], base: "./src/content/jotting" }),
 	schema: z.object({
 		title: z.string(), // Jotting title (required)
-		timestamp: z.date(), // Publication date (required)
+		timestamp: z.union([z.date(), z.string().transform(str => new Date(str))]), // Publication date (required)
 		tags: z.array(z.string()).optional(), // Array of topic tags
 		description: z.string().optional(), // Brief description
 		sensitive: z.boolean().default(false), // Marks content as sensitive
@@ -47,7 +47,7 @@ const preface = defineCollection({
 	// Load all markdown files
 	loader: glob({ pattern: "**/*.md", base: "./src/content/preface" }),
 	schema: z.object({
-		timestamp: z.date() // Creation timestamp
+		timestamp: z.union([z.date(), z.string().transform(str => new Date(str))]) // Creation timestamp
 	})
 });
 
