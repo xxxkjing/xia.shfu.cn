@@ -3,7 +3,7 @@ import { config, fields, collection } from "@keystatic/core";
 export default config({
 	storage: {
 		kind: "github",
-		repo: "tuyuritio/astro-theme-thought-lite"
+		repo: "xxxkjing/astro-blog-thought-lite"
 	},
 	collections: {
 		jotting: collection({
