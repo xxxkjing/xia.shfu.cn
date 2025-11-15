@@ -7,7 +7,11 @@ export default config({
 		}
 	},
 	storage: {
-		kind: "local"
+		kind: "github",
+		repo: {
+			owner : "xxxkjing",
+			name : "astro-blog-thought-lite"
+		}
 	},
 	collections: {
 		note: collection({
