@@ -8,6 +8,13 @@
       "dataType": "array",
       "title": "Series",
       "values": []
+    },
+    "tags": {
+      "description": "文章属于哪个标签",
+      "fieldType": "Tags",
+      "dataType": "array",
+      "title": "Tags",
+      "values": []
     }
   }
 }
