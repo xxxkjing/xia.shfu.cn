@@ -1,6 +1,6 @@
 {
-  "commit": "",
-  "generated": "Sun, 16 Nov 2025 03:35:51 GMT",
+  "commit": "2c5275ff7dc3646f9728cc7137f7a9c7892f2685",
+  "generated": "2025-11-16T03:45:44.104Z",
   "metadata": [
     {
       "__outstatic": {
@@ -116,6 +116,31 @@
       ],
       "timestamp": "2025-08-28T00:00:00.000Z",
       "title": "敏感内容示例"
+    },
+    {
+      "__outstatic": {
+        "commit": "2c5275ff7dc3646f9728cc7137f7a9c7892f2685",
+        "hash": "3111482378",
+        "path": "src/content/note/zh-cn/configuration.md"
+      },
+      "author": {
+        "name": "MetaIllusion",
+        "picture": "https://avatars.githubusercontent.com/u/105426747?v=4"
+      },
+      "collection": "bi-ji",
+      "description": "Astro 主题站点的基础配置说明，涵盖环境变量、站点信息、Markdown 处理、图标生成等核心配置项。",
+      "publishedAt": "2025-11-16T04:32:57.737Z",
+      "series": [
+      ],
+      "slug": "configuration",
+      "status": "published",
+      "tags": [
+        "Guide",
+        "Astro"
+      ],
+      "timestamp": "2025-11-04T00:00:00.000Z",
+      "title": "站点配置指南",
+      "top": 0
     }
   ]
 }
