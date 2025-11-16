@@ -1,0 +1,26 @@
+{
+  "commit": "",
+  "generated": "Sun, 16 Nov 2025 03:29:18 GMT",
+  "metadata": [
+    {
+      "__outstatic": {
+        "commit": "",
+        "hash": "101606672",
+        "path": "src/content/preface/zh-cn/2025-04-13-04-26-40.md"
+      },
+      "collection": "zh-cn",
+      "slug": "2025-04-13-04-26-40",
+      "timestamp": "2025-04-12T20:26:40.000Z"
+    },
+    {
+      "__outstatic": {
+        "commit": "",
+        "hash": "1229977117",
+        "path": "src/content/preface/zh-cn/1996-04-06-00-00-00.md"
+      },
+      "collection": "zh-cn",
+      "slug": "1996-04-06-00-00-00",
+      "timestamp": "1996-04-06T00:00:00.000Z"
+    }
+  ]
+}
