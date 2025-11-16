@@ -10,5 +10,11 @@
     "slug": "sensitive",
     "path": "src/content/note/zh-cn/sensitive",
     "children": []
+  },
+  {
+    "title": "Content",
+    "slug": "content",
+    "path": "src/content",
+    "children": []
   }
 ]
