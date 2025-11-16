@@ -10,5 +10,11 @@
     "slug": "shou-ye",
     "path": "src/content/preface/zh-cn",
     "children": []
+  },
+  {
+    "title": "随笔",
+    "slug": "sui-bi",
+    "path": "src/content/jotting/zh-cn",
+    "children": []
   }
 ]
