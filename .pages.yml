@@ -10,15 +10,25 @@ content:
     format: yaml-frontmatter
     view:
       primary: title
-      sort: [ 'date', 'title' ]
+      sort: [ 'timestamp', 'title' ]
     fields:
       - name: title
         label: Title
         type: string
         required: true
-      - name: date
-        label: Date
+      - name: timestamp
+        label: Timestamp
         type: date
+        required: true
+      - name: series
+        label: Series
+        type: string
+      - name: tags
+        label: Tags
+        type: list
+      - name: description
+        label: Description
+        type: text
       - name: body
         label: Body
         type: rich-text
@@ -30,15 +40,28 @@ content:
     format: yaml-frontmatter
     view:
       primary: title
-      sort: [ 'date', 'title' ]
+      sort: [ 'timestamp', 'title' ]
     fields:
       - name: title
         label: Title
         type: string
         required: true
-      - name: date
-        label: Date
+      - name: timestamp
+        label: Timestamp
         type: date
+        required: true
+      - name: tags
+        label: Tags
+        type: list
+      - name: description
+        label: Description
+        type: text
+      - name: toc
+        label: Table of Contents
+        type: boolean
+      - name: top
+        label: Top
+        type: number
       - name: body
         label: Body
         type: rich-text
@@ -50,15 +73,10 @@ content:
     format: yaml-frontmatter
     filename: '{year}-{month}-{day}-{hour}-{minute}-{second}'
     view:
-      primary: title
-      sort: [ 'date' ]
+      sort: [ 'timestamp' ]
     fields:
-      - name: title
-        label: Title
-        type: string
-        required: true
-      - name: date
-        label: Date
+      - name: timestamp
+        label: Timestamp
         type: date
         required: true
       - name: body
