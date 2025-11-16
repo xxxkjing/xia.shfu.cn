@@ -15,6 +15,12 @@
       "dataType": "array",
       "title": "Tags",
       "values": []
+    },
+    "description": {
+      "description": "文章的简要描述",
+      "fieldType": "String",
+      "dataType": "string",
+      "title": "Description"
     }
   }
 }
