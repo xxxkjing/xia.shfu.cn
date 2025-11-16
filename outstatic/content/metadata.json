@@ -1,6 +1,6 @@
 {
   "commit": "",
-  "generated": "Sun, 16 Nov 2025 03:30:24 GMT",
+  "generated": "Sun, 16 Nov 2025 03:35:51 GMT",
   "metadata": [
     {
       "__outstatic": {
@@ -99,6 +99,23 @@
       },
       "collection": "zh-cn",
       "slug": "introduction"
+    },
+    {
+      "__outstatic": {
+        "commit": "",
+        "hash": "1644710294",
+        "path": "src/content/note/zh-cn/sensitive/index.md"
+      },
+      "collection": "sensitive",
+      "description": "这是一个演示敏感内容警告的示例文档。",
+      "sensitive": true,
+      "slug": "index",
+      "tags": [
+        "Sensitive",
+        "Demo"
+      ],
+      "timestamp": "2025-08-28T00:00:00.000Z",
+      "title": "敏感内容示例"
     }
   ]
 }
