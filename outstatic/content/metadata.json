@@ -1,6 +1,6 @@
 {
   "commit": "",
-  "generated": "Sun, 16 Nov 2025 03:29:18 GMT",
+  "generated": "Sun, 16 Nov 2025 03:29:41 GMT",
   "metadata": [
     {
       "__outstatic": {
@@ -21,6 +21,57 @@
       "collection": "zh-cn",
       "slug": "1996-04-06-00-00-00",
       "timestamp": "1996-04-06T00:00:00.000Z"
+    },
+    {
+      "__outstatic": {
+        "commit": "",
+        "hash": "2548083741",
+        "path": "src/content/jotting/zh-cn/markdown.md"
+      },
+      "collection": "zh-cn",
+      "description": "详细介绍主题中扩展的 Markdown 语法功能，包括 Ruby 注音、缩写、剧透文本等特殊标记语法。",
+      "series": "Astro",
+      "slug": "markdown",
+      "tags": [
+        "Markup",
+        "Demo"
+      ],
+      "timestamp": "2024-07-21T00:00:00.000Z",
+      "title": "Markdown 扩展手册"
+    },
+    {
+      "__outstatic": {
+        "commit": "",
+        "hash": "348743360",
+        "path": "src/content/jotting/zh-cn/kong-yiji.md"
+      },
+      "collection": "zh-cn",
+      "description": "鲁迅先生的经典短篇小说，描写了在封建社会中受到教育却无法融入社会的知识分子孔乙己的悲剧命运。",
+      "series": "呐喊",
+      "slug": "kong-yiji",
+      "tags": [
+        "Literature",
+        "Demo"
+      ],
+      "timestamp": "1919-02-28T16:00:00.000Z",
+      "title": "孔乙己"
+    },
+    {
+      "__outstatic": {
+        "commit": "",
+        "hash": "2305386944",
+        "path": "src/content/jotting/zh-cn/udhr.md"
+      },
+      "collection": "zh-cn",
+      "description": "联合国大会于 1948 年通过的重要文件，确立了人类基本权利和自由的普遍标准和原则。",
+      "slug": "udhr",
+      "tags": [
+        "UnitedNations",
+        "Demo"
+      ],
+      "timestamp": "1948-12-10T00:00:00.000Z",
+      "title": "世界人权宣言",
+      "top": 1
     }
   ]
 }
