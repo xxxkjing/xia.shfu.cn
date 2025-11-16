@@ -22,5 +22,11 @@
     "slug": "xin-xi",
     "path": "src/content/information/zh-cn",
     "children": []
+  },
+  {
+    "title": "笔记 - 敏感内容",
+    "slug": "bi-ji-min-gan-nei-rong",
+    "path": "src/content/note/zh-cn/sensitive",
+    "children": []
   }
 ]
