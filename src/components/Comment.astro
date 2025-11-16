@@ -1,60 +1,40 @@
 ---
-import config from "$config";
+const { GISCUS_REPO, GISCUS_REPO_ID, GISCUS_CATEGORY, GISCUS_CATEGORY_ID } = import.meta.env;
 ---
 
 <section id="comment" class="w-full"></section>
 
-<script is:inline>
-	// Function to get the current theme for utterances
-	const getUtterancesTheme = () => {
-		return document.documentElement.dataset.theme === "dark" ? "github-dark" : "github-light";
-	};
+<script is:inline define:vars={{ GISCUS_REPO, GISCUS_REPO_ID, GISCUS_CATEGORY, GISCUS_CATEGORY_ID }}>
+  const getGiscusTheme = () => {
+    return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+  };
 
-	// 1. Set initial theme directly on the script tag for reliability on first load.
-	const script = document.createElement("script");
-	script.src = "https://utteranc.es/client.js";
-	script.setAttribute("repo", "xxxkjing/giscus-comment");
-	script.setAttribute("issue-term", "og:title");
-	script.setAttribute("label", "💬评论");
-	script.setAttribute("theme", getUtterancesTheme()); // Set initial theme
-	script.setAttribute("crossorigin", "anonymous");
-	script.async = true;
-	document.querySelector("#comment").appendChild(script);
+  const script = document.createElement("script");
+  script.src = "https://giscus.app/client.js";
+  script.setAttribute("data-repo", GISCUS_REPO);
+  script.setAttribute("data-repo-id", GISCUS_REPO_ID);
+  script.setAttribute("data-category", GISCUS_CATEGORY);
+  script.setAttribute("data-category-id", GISCUS_CATEGORY_ID);
+  script.setAttribute("data-mapping", "pathname");
+  script.setAttribute("data-strict", "0");
+  script.setAttribute("data-reactions-enabled", "1");
+  script.setAttribute("data-emit-metadata", "0");
+  script.setAttribute("data-input-position", "top");
+  script.setAttribute("data-theme", getGiscusTheme());
+  script.setAttribute("data-lang", "zh-CN");
+  script.setAttribute("crossorigin", "anonymous");
+  script.async = true;
+  document.querySelector("#comment").appendChild(script);
 
-	// 2. Use postMessage for dynamic theme changes (after site theme switch or login).
-	const postThemeMessage = () => {
-		const message = {
-			type: "set-theme",
-			theme: getUtterancesTheme(),
-		};
-		const utterances = document.querySelector(".utterances-frame");
-		if (utterances instanceof HTMLIFrameElement && utterances.contentWindow) {
-			utterances.contentWindow.postMessage(message, "https://utteranc.es");
-		}
-	};
-
-	// Use a longer timeout to ensure the iframe is ready to receive the message.
-	const delayedPostTheme = () => setTimeout(postThemeMessage, 1000);
-
-	const commentSection = document.querySelector("#comment");
-	if (commentSection) {
-		// Observe when the iframe is added to the DOM
-		const observer = new MutationObserver(() => {
-			const utterancesFrame = document.querySelector(".utterances-frame");
-			if (utterancesFrame instanceof HTMLIFrameElement) {
-				// The 'load' event fires when iframe content (re)loads, e.g., after login.
-				// We use a timeout to wait for scripts inside the iframe to initialize.
-				utterancesFrame.addEventListener("load", delayedPostTheme);
-				observer.disconnect(); // Found it, no need to observe anymore.
-			}
-		});
-		observer.observe(commentSection, { childList: true });
-	}
-
-	// Observe data-theme attribute changes on the root element for site theme switches.
-	const themeObserver = new MutationObserver(delayedPostTheme);
-	themeObserver.observe(document.documentElement, {
-		attributes: true,
-		attributeFilter: ["data-theme"],
-	});
+  const themeObserver = new MutationObserver(() => {
+    const theme = getGiscusTheme();
+    const iframe = document.querySelector(".giscus-frame");
+    if (iframe) {
+      iframe.contentWindow.postMessage({ giscus: { setConfig: { theme } } }, "https://giscus.app");
+    }
+  });
+  themeObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
 </script>
