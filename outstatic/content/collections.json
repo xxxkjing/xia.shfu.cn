@@ -16,5 +16,11 @@
     "slug": "sui-bi",
     "path": "src/content/jotting/zh-cn",
     "children": []
+  },
+  {
+    "title": "信息",
+    "slug": "xin-xi",
+    "path": "src/content/information/zh-cn",
+    "children": []
   }
 ]
