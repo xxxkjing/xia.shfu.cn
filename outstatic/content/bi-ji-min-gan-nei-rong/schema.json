@@ -21,7 +21,8 @@
       "description": "文章的简要描述",
       "fieldType": "String",
       "dataType": "string",
-      "title": "Descripion"
+      "title": "Descripion",
+      "required": true
     }
   }
 }
