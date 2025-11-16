@@ -1,69 +1,57 @@
----
-title: "站点配置指南"
-timestamp: "2025-11-04T00:00:00.000Z"
-tags:
-  - "Guide"
-  - "Astro"
-description: "Astro 主题站点的基础配置说明，涵盖环境变量、站点信息、Markdown 处理、图标生成等核心配置项。"
-publishedAt: "2025-11-16T04:32:57.737Z"
-status: "published"
-author:
-  name: "MetaIllusion"
-  picture: "https://avatars.githubusercontent.com/u/105426747?v=4"
-slug: "configuration"
-top: 0
+﻿---
+title: 站点配置指南
+timestamp: 2025-11-04 00:00:00+00:00
+tags: [Guide, Astro]
+description: Astro 主题站点的基础配置说明，涵盖环境变量、站点信息、Markdown 处理、图标生成等核心配置项。
 ---
 
 ## `.env`
 
-1. 先运行命令创建 `.env` 文件：
-
-   ```sh
-   cp .env.example .env
-   ```
-
+1. 运行命令创建 `.env` 文件：
+    ```sh
+    cp .env.example .env
+    ```
 2. 修改或添加变量：
+    | 变量 | 描述 |
+    | - | - |
+    | `PUBLIC_TIMEZONE`* | 默认显示时区，参考[时区列表](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) |
 
-   | 变量 | 描述 |
-   | --- | --- |
-   | `PUBLIC_TIMEZONE`\* | 默认显示时区，参考[时区列表](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) |
-
-   `*` 表示必要选项。
+    `*` 表示必要选项。
 
 ## `astro.config.ts`
 
 - `site` - 站点 URL
 - `i18n`
-  - `locales` - 支持的语言列表
-  - `defaultLocale` - 默认语言
+    - `locales` - 支持的语言列表
+    - `defaultLocale` - 默认语言
 - `markdown`
-  - `remarkPlugins` - Markdown 处理插件
-  - `rehypePlugins` - HTML 处理插件
+    - `remarkPlugins` - Markdown 处理插件
+    - `rehypePlugins` - HTML 处理插件
 
 ## `site.config.ts`
 
 - `title` - 站点标题
 - `prologue` - 首页标语，支持 `\n` 换行
 - `author`
-  - **string** - 作者名称
-  - **object**
-    - `name` - 作者名称
-    - `email` - 作者邮箱
-    - `link` - 作者个人网站
+    - **string** - 作者名称
+    - **object**
+        - `name` - 作者名称
+        - `email` - 作者邮箱
+        - `link` - 作者个人网站
 - `description` - 站点描述
 - `copyright` - 版权信息
-  - `type` - CC 许可类型
-  - `year` - 版权年份或年份范围
+    - `type` - CC 许可类型
+    - `year` - 版权年份或年份范围
 - `feed` - 订阅源
-  - `section` - 订阅源内容板块
-    - `*` - 所有板块
-    - **array**
-      - `note` - 笔记板块
-      - `jotting` - 随笔板块
-  - `limit` - 返回内容数量限制
+    - `section` - 订阅源内容板块
+        - **`*`** - 所有板块
+        - **array**
+            - `note` - 笔记板块
+            - `jotting` - 随笔板块
+    - `limit` - 返回内容数量限制
 - `latest` - 最新内容显示
-  - `note` - 是否显示最新笔记
-  - `jotting` - 是否显示最新随笔
+    - `note` - 是否显示最新笔记
+    - `jotting` - 是否显示最新随笔
 
 ## 图标生成
 
@@ -94,6 +82,6 @@ top: 0
 可通过如下三种方式配置：
 
 1. 使用 SVG 文件替换 `src/icons/site-logo.svg`，将[自动读取](https://www.astroicon.dev/guides/customization/#local-icons)并应用。
-   - 建议使用 `stroke="currentColor"` 以适应主题色彩变化。
+    - 建议使用 `stroke="currentColor"` 以适应主题色彩变化。
 2. 使用 [Iconify 图标集](https://www.astroicon.dev/guides/customization/#open-source-icon-sets)，以 `<PREFIX>:<ICON>` 形式引用。
 3. 直接修改为图片导入或删除该部分内容。
