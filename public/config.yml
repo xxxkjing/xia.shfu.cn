@@ -1,5 +1,5 @@
 backend:
-  name: git-gateway
+  name: github
   repo: xxxkjing/astro-blog-thought-lite
   branch: main # Branch to update (optional; defaults to master)
 
