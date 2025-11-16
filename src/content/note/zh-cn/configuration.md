@@ -1,17 +1,8 @@
----
-title: "站点配置指南"
-timestamp: "2025-11-04T00:00:00.000Z"
-tags:
-  - "Guide"
-  - "Astro"
-description: "Astro 主题站点的基础配置说明，涵盖环境变量、站点信息、Markdown 处理、图标生成等核心配置项。"
-publishedAt: "2025-11-16T05:04:56.768Z"
-status: "published"
-author:
-  name: "MetaIllusion"
-  picture: "https://avatars.githubusercontent.com/u/105426747?v=4"
-slug: "configuration"
-top: 0
+﻿---
+title: 站点配置指南
+timestamp: 2025-11-04 00:00:00+00:00
+tags: [Guide, Astro]
+description: Astro 主题站点的基础配置说明，涵盖环境变量、站点信息、Markdown 处理、图标生成等核心配置项。
 ---
 
 ## `.env`
