@@ -25,7 +25,8 @@ content:
         type: string
       - name: tags
         label: Tags
-        type: list
+        type: string
+        list: true
       - name: description
         label: Description
         type: text
@@ -52,7 +53,8 @@ content:
         required: true
       - name: tags
         label: Tags
-        type: list
+        type: string
+        list: true
       - name: description
         label: Description
         type: text
@@ -70,10 +72,6 @@ content:
     label: Preface
     type: collection
     path: src/content/preface/zh-cn
-    format: yaml-frontmatter
-    filename: '{year}-{month}-{day}-{hour}-{minute}-{second}'
-    view:
-      sort: [ 'timestamp' ]
     fields:
       - name: timestamp
         label: Timestamp
@@ -130,7 +128,8 @@ content:
     fields:
       - name: events
         label: Events
-        type: list
+        type: string
+        list: true
         fields:
           - name: date
             label: Date
