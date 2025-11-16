@@ -1,28 +1,45 @@
 {
-  "title": "sui-bi",
+  "title": "随笔元数据",
   "type": "object",
   "properties": {
-    "series": {
-      "description": "文章属于哪个系列",
-      "fieldType": "Tags",
-      "dataType": "array",
-      "title": "Series",
-      "values": []
+    "timestamp": {
+      "title": "发布时间",
+      "description": "随笔发布日期和时间",
+      "dataType": "date",
+      "fieldType": "Date"
     },
     "tags": {
-      "description": "文章属于哪个标签",
-      "required": true,
-      "fieldType": "Tags",
+      "title": "标签列表",
+      "description": "随笔标签",
       "dataType": "array",
-      "title": "Tags",
-      "values": []
+      "fieldType": "Tags"
     },
     "description": {
-      "description": "文章的简要描述",
-      "required": true,
-      "fieldType": "String",
+      "title": "描述",
+      "description": "随笔简短描述",
       "dataType": "string",
-      "title": "Description"
+      "fieldType": "Textarea"
+    },
+    "sensitive": {
+      "title": "敏感内容",
+      "description": "标记此内容是否为敏感内容",
+      "dataType": "boolean",
+      "fieldType": "Boolean",
+      "defaultValue": false
+    },
+    "top": {
+      "title": "优先级",
+      "description": "随笔排序优先级(数字越大优先级越高)",
+      "dataType": "number",
+      "fieldType": "Number",
+      "defaultValue": 0
+    },
+    "draft": {
+      "title": "草稿",
+      "description": "是否为草稿",
+      "dataType": "boolean",
+      "fieldType": "Boolean",
+      "defaultValue": false
     }
   }
 }

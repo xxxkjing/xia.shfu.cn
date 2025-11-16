@@ -1,6 +1,12 @@
 {
-  "title": "信息",
-  "slug": "xin-xi",
+  "title": "信息元数据",
   "type": "object",
-  "properties": {}
+  "properties": {
+    "title": {
+      "title": "页面标题",
+      "description": "信息页面的标题",
+      "dataType": "string",
+      "fieldType": "String"
+    }
+  }
 }

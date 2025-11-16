@@ -1,6 +1,5 @@
 {
-  "title": "首页",
-  "slug": "shou-ye",
+  "title": "首页元数据",
   "type": "object",
   "properties": {}
 }

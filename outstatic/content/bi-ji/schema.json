@@ -1,36 +1,58 @@
 {
-  "title": "bi-ji",
+  "title": "笔记元数据",
   "type": "object",
   "properties": {
+    "timestamp": {
+      "title": "发布时间",
+      "description": "文章发布日期和时间",
+      "dataType": "date",
+      "fieldType": "Date"
+    },
     "series": {
-      "description": "文章属于哪个系列",
-      "fieldType": "Tags",
-      "dataType": "array",
-      "title": "Series",
-      "values": []
+      "title": "系列",
+      "description": "文章所属系列名称",
+      "dataType": "string",
+      "fieldType": "String"
     },
     "tags": {
-      "description": "文章属于哪个标签",
-      "fieldType": "Tags",
+      "title": "标签列表",
+      "description": "文章标签",
       "dataType": "array",
-      "title": "Tags",
-      "values": [
-        {}
-      ],
-      "required": true
+      "fieldType": "Tags"
     },
     "description": {
-      "description": "文章的简要描述",
-      "fieldType": "String",
+      "title": "描述",
+      "description": "文章简短描述/摘要",
       "dataType": "string",
-      "title": "Description",
-      "required": true
+      "fieldType": "Textarea"
+    },
+    "sensitive": {
+      "title": "敏感内容",
+      "description": "标记此内容是否为敏感内容",
+      "dataType": "boolean",
+      "fieldType": "Boolean",
+      "defaultValue": false
+    },
+    "toc": {
+      "title": "显示目录",
+      "description": "是否显示文章目录",
+      "dataType": "boolean",
+      "fieldType": "Boolean",
+      "defaultValue": false
     },
     "top": {
-      "description": "文章的权重，决定了显示位置，不填即为正常文章",
-      "fieldType": "Number",
+      "title": "优先级",
+      "description": "文章排序优先级(数字越大优先级越高)",
       "dataType": "number",
-      "title": "Top"
+      "fieldType": "Number",
+      "defaultValue": 0
+    },
+    "draft": {
+      "title": "草稿",
+      "description": "是否为草稿(不显示在公开列表中)",
+      "dataType": "boolean",
+      "fieldType": "Boolean",
+      "defaultValue": false
     }
   }
 }
