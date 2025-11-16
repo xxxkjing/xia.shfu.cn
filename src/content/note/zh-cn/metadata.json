@@ -1,6 +1,6 @@
 {
-  "commit": "",
-  "generated": "Sun, 16 Nov 2025 03:07:42 GMT",
+  "commit": "7ba81ca5e35b4a61e282199e0e7a0ccfb655f9c0",
+  "generated": "2025-11-16T03:15:24.918Z",
   "metadata": [
     {
       "__outstatic": {
@@ -18,23 +18,6 @@
       ],
       "timestamp": "2025-08-28T00:00:00.000Z",
       "title": "敏感内容示例"
-    },
-    {
-      "__outstatic": {
-        "commit": "ed70980e3a6452d19260a4712f39bc51168f4279",
-        "hash": "2173813845",
-        "path": "src/content/note/zh-cn/image-preview/index.md"
-      },
-      "collection": "image-preview",
-      "description": "演示 Markdown 中图片引用的三种方式：相对路径、绝对路径和外部链接，展示图片优化和管理最佳实践。",
-      "series": "Astro",
-      "slug": "index",
-      "tags": [
-        "Content",
-        "Demo"
-      ],
-      "timestamp": "2025-04-04T00:00:00.000Z",
-      "title": "Markdown 图片预览"
     }
   ]
 }
