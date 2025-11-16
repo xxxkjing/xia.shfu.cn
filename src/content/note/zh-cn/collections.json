@@ -1,11 +1,5 @@
 [
   {
-    "title": "Content",
-    "slug": "content",
-    "path": "src/content",
-    "children": []
-  },
-  {
     "title": "Notes",
     "slug": "notes",
     "path": "src/content/note/zh-cn/notes",
