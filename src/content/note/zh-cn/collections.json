@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Image - preview",
+    "slug": "image-preview",
+    "path": "src/content/note/zh-cn/image-preview",
+    "children": []
+  },
+  {
+    "title": "Sensitive",
+    "slug": "sensitive",
+    "path": "src/content/note/zh-cn/sensitive",
+    "children": []
+  }
+]
