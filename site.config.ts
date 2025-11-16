@@ -1,6 +1,6 @@
 const config = {
 	title: "MetaIllusion的博客",
-	prologue: "Time, Truth, and Hearts",
+	prologue: "I'll See You On The Dark Side Of The Moon",
 	author: {
 		name: "MetaIllusion",
 		email: "xkjing.xiajing@gmail.com",
