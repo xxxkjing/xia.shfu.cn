@@ -1,41 +1,35 @@
 ---
-import { getCollection } from "astro:content";
+import notionLoader from "../../../notion.config";
 import Base from "$layouts/Base.astro";
 import Jotting from "$components/Jotting.svelte";
 import Icon from "$components/Icon.astro";
 
-const jottings = await getCollection("jotting", jotting => {
-	// Filter by publication status and locale
-	let published = !jotting.data.draft;
-	let localed = jotting.id.split("/")[0] === "zh-cn";
-
-	return published && localed;
-});
+const jottings = await notionLoader.load("jotting");
 
 // Standardize note structure
 let list = jottings.map(jotting => ({
-	id: jotting.id,
+	id: jotting.slug,
 	data: {
-		title: jotting.data.title,
-		timestamp: jotting.data.timestamp,
-		tags: jotting.data.tags,
-		sensitive: jotting.data.sensitive,
-		top: jotting.data.top
+		title: jotting.title,
+		timestamp: jotting.properties.timestamp,
+		tags: jotting.properties.tags,
+		sensitive: jotting.properties.sensitive,
+		top: jotting.properties.top
 	}
 }));
 
 // Extract all unique tags from the filtered notes
-const tags = Array.from(new Set(jottings.flatMap(jotting => jotting.data.tags).filter(Boolean))).sort();
+const tags = Array.from(new Set(jottings.flatMap(jotting => jotting.properties.tags).filter(Boolean))).sort();
 ---
 
 <Base title="随笔">
-	<main class="flex flex-col grow">
-		<Jotting client:load jottings={list} {tags}>
-			<Icon name="lucide:flag-triangle-right" slot="top" />
-			<Icon name="lucide:siren" title="敏感内容" slot="sensitive" />
-			<Icon name="lucide:arrow-left" slot="left" />
-			<Icon name="lucide:arrow-right" slot="right" />
-			<Icon name="lucide:ellipsis" slot="dots" />
-		</Jotting>
-	</main>
+    <main class="flex flex-col grow">
+        <Jotting client:load jottings={list} {tags}>
+            <Icon name="lucide:flag-triangle-right" slot="top" />
+            <Icon name="lucide:siren" title="敏感内容" slot="sensitive" />
+            <Icon name="lucide:arrow-left" slot="left" />
+            <Icon name="lucide:arrow-right" slot="right" />
+            <Icon name="lucide:ellipsis" slot="dots" />
+        </Jotting>
+    </main>
 </Base>
