@@ -2,7 +2,7 @@ backend:
   name: github
   repo: xxxkjing/astro-blog-thought-lite
   branch: main # Branch to update (optional; defaults to master)
-  app_id: Ov23li4c1Y4ZI6GMiNZJ # IMPORTANT: Replace with your GitHub OAuth App's Client ID
+  auth_gateway: /api/auth # Use a server-side authentication gateway
 
 # i18n
 i18n:
