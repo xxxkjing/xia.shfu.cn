@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "title": "笔记",
+    "slug": "bi-ji",
+    "path": "src/content/note/zh-cn",
+    "children": []
+  }
+]
