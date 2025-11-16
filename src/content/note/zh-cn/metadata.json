@@ -1,0 +1,40 @@
+{
+  "commit": "",
+  "generated": "Sun, 16 Nov 2025 03:07:42 GMT",
+  "metadata": [
+    {
+      "__outstatic": {
+        "commit": "2c008c733d757bc2cc74b7d31341f2b49026fda2",
+        "hash": "1644710294",
+        "path": "src/content/note/zh-cn/sensitive/index.md"
+      },
+      "collection": "sensitive",
+      "description": "这是一个演示敏感内容警告的示例文档。",
+      "sensitive": true,
+      "slug": "index",
+      "tags": [
+        "Sensitive",
+        "Demo"
+      ],
+      "timestamp": "2025-08-28T00:00:00.000Z",
+      "title": "敏感内容示例"
+    },
+    {
+      "__outstatic": {
+        "commit": "ed70980e3a6452d19260a4712f39bc51168f4279",
+        "hash": "2173813845",
+        "path": "src/content/note/zh-cn/image-preview/index.md"
+      },
+      "collection": "image-preview",
+      "description": "演示 Markdown 中图片引用的三种方式：相对路径、绝对路径和外部链接，展示图片优化和管理最佳实践。",
+      "series": "Astro",
+      "slug": "index",
+      "tags": [
+        "Content",
+        "Demo"
+      ],
+      "timestamp": "2025-04-04T00:00:00.000Z",
+      "title": "Markdown 图片预览"
+    }
+  ]
+}
