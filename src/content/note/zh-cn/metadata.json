@@ -1,23 +1,6 @@
 {
-  "commit": "7ba81ca5e35b4a61e282199e0e7a0ccfb655f9c0",
-  "generated": "2025-11-16T03:15:24.918Z",
+  "commit": "50c6cbc240a8ceda1e9f5e9ef381a7c07a888577",
+  "generated": "2025-11-16T03:15:28.431Z",
   "metadata": [
-    {
-      "__outstatic": {
-        "commit": "2c008c733d757bc2cc74b7d31341f2b49026fda2",
-        "hash": "1644710294",
-        "path": "src/content/note/zh-cn/sensitive/index.md"
-      },
-      "collection": "sensitive",
-      "description": "这是一个演示敏感内容警告的示例文档。",
-      "sensitive": true,
-      "slug": "index",
-      "tags": [
-        "Sensitive",
-        "Demo"
-      ],
-      "timestamp": "2025-08-28T00:00:00.000Z",
-      "title": "敏感内容示例"
-    }
   ]
 }
