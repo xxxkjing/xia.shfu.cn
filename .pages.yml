@@ -1,0 +1,42 @@
+# PagesCMS 配置文件
+# 参考文档: https://pagescms.org/docs/configuration/
+
+# `media_folder` 定义了通过 CMS 上传的媒体文件存放的目录。
+# `public_folder` 定义了媒体文件的公共访问路径。
+# 例如，`public/uploads/image.png` 将可以通过 `/uploads/image.png` 访问。
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "note"
+    label: "笔记"
+    folder: "src/content/note/zh-cn"
+    create: true
+    fields:
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "时间戳", name: "timestamp", widget: "datetime" }
+      - { label: "标签", name: "tags", widget: "list", required: false }
+      - { label: "描述", name: "description", widget: "string", required: false }
+      - { label: "正文", name: "body", widget: "markdown" }
+  - name: "jotting"
+    label: "随笔"
+    folder: "src/content/jotting/zh-cn"
+    create: true
+    fields:
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "时间戳", name: "timestamp", widget: "datetime" }
+      - { label: "标签", name: "tags", widget: "list", required: false }
+      - { label: "描述", name: "description", widget: "string", required: false }
+      - { label: "正文", name: "body", widget: "markdown" }
+  - name: "preface"
+    label: "序文"
+    folder: "src/content/preface/zh-cn"
+    create: true
+    # 根据已有文件名格式，新文件将以 `年-月-日-时-分-秒` 的格式命名
+    slug: "{{year}}-{{month}}-{{day}}-{{hour}}-{{minute}}-{{second}}"
+    fields:
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "时间戳", name: "timestamp", widget: "datetime" }
+      - { label: "标签", name: "tags", widget: "list", required: false }
+      - { label: "描述", name: "description", widget: "string", required: false }
+      - { label: "正文", name: "body", widget: "markdown" }
