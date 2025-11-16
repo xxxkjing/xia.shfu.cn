@@ -1,42 +1,122 @@
-# PagesCMS 配置文件
-# 参考文档: https://pagescms.org/docs/configuration/
+media:
+  input: public/assets
+  output: /assets
 
-# `media_folder` 定义了通过 CMS 上传的媒体文件存放的目录。
-# `public_folder` 定义了媒体文件的公共访问路径。
-# 例如，`public/uploads/image.png` 将可以通过 `/uploads/image.png` 访问。
-media_folder: "public/uploads"
-public_folder: "/uploads"
+content:
+  - name: jotting
+    label: Jotting
+    type: collection
+    path: src/content/jotting/zh-cn
+    format: yaml-frontmatter
+    view:
+      primary: title
+      sort: [ 'date', 'title' ]
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+      - name: body
+        label: Body
+        type: rich-text
 
-collections:
-  - name: "note"
-    label: "笔记"
-    folder: "src/content/note/zh-cn"
-    create: true
+  - name: note
+    label: Note
+    type: collection
+    path: src/content/note/zh-cn
+    format: yaml-frontmatter
+    view:
+      primary: title
+      sort: [ 'date', 'title' ]
     fields:
-      - { label: "标题", name: "title", widget: "string" }
-      - { label: "时间戳", name: "timestamp", widget: "datetime" }
-      - { label: "标签", name: "tags", widget: "list", required: false }
-      - { label: "描述", name: "description", widget: "string", required: false }
-      - { label: "正文", name: "body", widget: "markdown" }
-  - name: "jotting"
-    label: "随笔"
-    folder: "src/content/jotting/zh-cn"
-    create: true
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: preface
+    label: Preface
+    type: collection
+    path: src/content/preface/zh-cn
+    format: yaml-frontmatter
+    filename: '{year}-{month}-{day}-{hour}-{minute}-{second}'
+    view:
+      primary: title
+      sort: [ 'date' ]
     fields:
-      - { label: "标题", name: "title", widget: "string" }
-      - { label: "时间戳", name: "timestamp", widget: "datetime" }
-      - { label: "标签", name: "tags", widget: "list", required: false }
-      - { label: "描述", name: "description", widget: "string", required: false }
-      - { label: "正文", name: "body", widget: "markdown" }
-  - name: "preface"
-    label: "序文"
-    folder: "src/content/preface/zh-cn"
-    create: true
-    # 根据已有文件名格式，新文件将以 `年-月-日-时-分-秒` 的格式命名
-    slug: "{{year}}-{{month}}-{{day}}-{{hour}}-{{minute}}-{{second}}"
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+        required: true
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: introduction
+    label: Introduction
+    type: file
+    path: src/content/information/zh-cn/introduction.md
+    format: yaml-frontmatter
     fields:
-      - { label: "标题", name: "title", widget: "string" }
-      - { label: "时间戳", name: "timestamp", widget: "datetime" }
-      - { label: "标签", name: "tags", widget: "list", required: false }
-      - { label: "描述", name: "description", widget: "string", required: false }
-      - { label: "正文", name: "body", widget: "markdown" }
+      - name: title
+        label: Title
+        type: string
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: policy
+    label: Policy
+    type: file
+    path: src/content/information/zh-cn/policy.md
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: roll
+    label: Roll
+    type: file
+    path: src/content/information/zh-cn/roll.md
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: chronicle
+    label: Chronicle
+    type: file
+    path: src/content/information/zh-cn/chronicle.yaml
+    format: yaml
+    fields:
+      - name: events
+        label: Events
+        type: list
+        fields:
+          - name: date
+            label: Date
+            type: date
+          - name: description
+            label: Description
+            type: string
