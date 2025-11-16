@@ -35,7 +35,7 @@ let filtered: any[] = $derived.by(() => {
 			return matchSeries && matchTags;
 		})
 		// Sort by timestamp (newest first)
-		.sort((a, b) => b.data.top - a.data.top || new Date(b.data.timestamp).getTime() - new Date(a.data.timestamp).getTime());
+		.sort((a, b) => b.data.top - a.data.top || b.data.timestamp.getTime() - a.data.timestamp.getTime());
 
 	if (!initial) return list;
 

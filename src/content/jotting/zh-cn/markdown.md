@@ -2,9 +2,7 @@
 title: Markdown 扩展手册
 timestamp: 2024-07-21 00:00:00+00:00
 series: Astro
-tags:
-  - Markup
-  - Demotest
+tags: [Markup, Demo]
 description: 详细介绍主题中扩展的 Markdown 语法功能，包括 Ruby 注音、缩写、剧透文本等特殊标记语法。
 ---
 

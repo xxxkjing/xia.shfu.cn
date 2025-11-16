@@ -12,7 +12,7 @@ let filtered: any[] = $derived.by(() => {
 		// Apply tag filtering
 		.filter(jotting => tags.every(tag => jotting.data.tags?.includes(tag)))
 		// Sort by timestamp (newest first)
-		.sort((a, b) => b.data.top - a.data.top || new Date(b.data.timestamp).getTime() - new Date(a.data.timestamp).getTime());
+		.sort((a, b) => b.data.top - a.data.top || b.data.timestamp.getTime() - a.data.timestamp.getTime());
 
 	if (!initial) return list;
 
