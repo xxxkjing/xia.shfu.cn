@@ -8,6 +8,14 @@
       "dataType": "array",
       "title": "Serious",
       "values": []
+    },
+    "tags": {
+      "description": "文章属于哪个标签",
+      "required": true,
+      "fieldType": "Tags",
+      "dataType": "array",
+      "title": "Tags",
+      "values": []
     }
   }
 }
