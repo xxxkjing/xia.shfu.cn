@@ -1,6 +1,13 @@
 {
-  "title": "笔记",
-  "slug": "bi-ji",
+  "title": "bi-ji",
   "type": "object",
-  "properties": {}
+  "properties": {
+    "series": {
+      "description": "文章属于哪个系列",
+      "fieldType": "Tags",
+      "dataType": "array",
+      "title": "Series",
+      "values": []
+    }
+  }
 }
