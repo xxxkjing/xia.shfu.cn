@@ -21,7 +21,8 @@
       "description": "文章的简要描述",
       "fieldType": "String",
       "dataType": "string",
-      "title": "Description"
+      "title": "Description",
+      "required": true
     },
     "top": {
       "description": "文章的权重，决定了显示位置，不填即为正常文章",
