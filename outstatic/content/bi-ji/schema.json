@@ -24,7 +24,7 @@
       "title": "描述",
       "description": "文章简短描述/摘要",
       "dataType": "string",
-      "fieldType": "Textarea"
+      "fieldType": "String"
     },
     "sensitive": {
       "title": "敏感内容",

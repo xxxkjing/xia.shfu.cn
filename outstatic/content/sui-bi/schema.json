@@ -18,7 +18,7 @@
       "title": "描述",
       "description": "随笔简短描述",
       "dataType": "string",
-      "fieldType": "Textarea"
+      "fieldType": "String"
     },
     "sensitive": {
       "title": "敏感内容",
