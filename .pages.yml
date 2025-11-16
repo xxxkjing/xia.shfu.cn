@@ -51,6 +51,9 @@ content:
         label: Timestamp
         type: date
         required: true
+      - name: series
+        label: Series
+        type: string
       - name: tags
         label: Tags
         type: string
