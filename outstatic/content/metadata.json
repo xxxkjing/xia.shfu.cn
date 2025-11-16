@@ -1,6 +1,6 @@
 {
-  "commit": "2c5275ff7dc3646f9728cc7137f7a9c7892f2685",
-  "generated": "2025-11-16T03:45:44.104Z",
+  "commit": "4b72d642348da2544063ef8e86c469a229f04eee",
+  "generated": "2025-11-16T04:20:03.605Z",
   "metadata": [
     {
       "__outstatic": {
@@ -119,8 +119,8 @@
     },
     {
       "__outstatic": {
-        "commit": "2c5275ff7dc3646f9728cc7137f7a9c7892f2685",
-        "hash": "3111482378",
+        "commit": "4b72d642348da2544063ef8e86c469a229f04eee",
+        "hash": "3819934528",
         "path": "src/content/note/zh-cn/configuration.md"
       },
       "author": {
@@ -129,9 +129,7 @@
       },
       "collection": "bi-ji",
       "description": "Astro 主题站点的基础配置说明，涵盖环境变量、站点信息、Markdown 处理、图标生成等核心配置项。",
-      "publishedAt": "2025-11-16T04:32:57.737Z",
-      "series": [
-      ],
+      "publishedAt": "2025-11-16T05:04:56.768Z",
       "slug": "configuration",
       "status": "published",
       "tags": [
