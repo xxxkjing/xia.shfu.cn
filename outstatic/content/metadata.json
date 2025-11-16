@@ -1,6 +1,6 @@
 {
   "commit": "",
-  "generated": "Sun, 16 Nov 2025 03:29:41 GMT",
+  "generated": "Sun, 16 Nov 2025 03:30:24 GMT",
   "metadata": [
     {
       "__outstatic": {
@@ -72,6 +72,33 @@
       "timestamp": "1948-12-10T00:00:00.000Z",
       "title": "世界人权宣言",
       "top": 1
+    },
+    {
+      "__outstatic": {
+        "commit": "",
+        "hash": "4111430023",
+        "path": "src/content/information/zh-cn/policy.md"
+      },
+      "collection": "zh-cn",
+      "slug": "policy"
+    },
+    {
+      "__outstatic": {
+        "commit": "",
+        "hash": "4289964284",
+        "path": "src/content/information/zh-cn/roll.md"
+      },
+      "collection": "zh-cn",
+      "slug": "roll"
+    },
+    {
+      "__outstatic": {
+        "commit": "",
+        "hash": "433656783",
+        "path": "src/content/information/zh-cn/introduction.md"
+      },
+      "collection": "zh-cn",
+      "slug": "introduction"
     }
   ]
 }
