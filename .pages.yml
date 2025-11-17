@@ -89,9 +89,6 @@ content:
     type: file
     path: src/content/information/zh-cn/introduction.md
     fields:
-      - name: title
-        label: Title
-        type: string
       - name: body
         label: Body
         type: rich-text
@@ -101,9 +98,6 @@ content:
     type: file
     path: src/content/information/zh-cn/policy.md
     fields:
-      - name: title
-        label: Title
-        type: string
       - name: body
         label: Body
         type: rich-text
@@ -113,9 +107,6 @@ content:
     type: file
     path: src/content/information/zh-cn/roll.md
     fields:
-      - name: title
-        label: Title
-        type: string
       - name: body
         label: Body
         type: rich-text
