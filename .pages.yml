@@ -88,7 +88,6 @@ content:
     label: Introduction
     type: file
     path: src/content/information/zh-cn/introduction.md
-    format: yaml-frontmatter
     fields:
       - name: title
         label: Title
@@ -101,7 +100,6 @@ content:
     label: Policy
     type: file
     path: src/content/information/zh-cn/policy.md
-    format: yaml-frontmatter
     fields:
       - name: title
         label: Title
@@ -114,7 +112,6 @@ content:
     label: Roll
     type: file
     path: src/content/information/zh-cn/roll.md
-    format: yaml-frontmatter
     fields:
       - name: title
         label: Title
