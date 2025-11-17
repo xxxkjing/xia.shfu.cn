@@ -1,7 +1,6 @@
 ---
-title: pip换源
+title: 为Python的pip换源
 timestamp: 2025-10-06
-series: Python
 tags:
   - Software
 description: 最简单、最快捷的Python换源教程
