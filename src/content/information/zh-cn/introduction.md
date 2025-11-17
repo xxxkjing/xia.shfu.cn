@@ -1,10 +1,13 @@
+---
+---
 ## MetaIllusion
 
 关于网络名称，和 Meta 公司没有半点关系，仅仅是有次做梦想到的
 
-而站点的签名：Time, Truth, and Hearts 其实是从 All These Things That I've Done 这首歌中截取的歌词，希望这个世界没有战争。
+而站点的签名：I'll see you on the dark side of the moon 其实是从 Brain Damage 这首歌中截取的歌词，向所有人强推这首歌以及它的专辑。
 
 联系：[Email](mailto:xkjing.xiajing@gmail.com) 或者 [Github](https://github.com/xxxkjing)
+
 ## Indie Developer 独立开发者
 
 我是一名信息技术爱好者，也是一名独立的开发者，目前就读于PFLS，正在尝试努力学习，积极向上
@@ -16,9 +19,17 @@
 !!但你可以随时来高二一班找我玩！!!
 
 ## 项目
+
 | **名称** | **地址** | **描述** | **语言** |
 | --- | --- | --- | --- |
-| DownList | https://github.com/xxxkjing/DownList | 无限制下载网易云音乐 | Python |
-| SoftLock | https://github.com/xxxkjing/SoftLock | 研究性学习成果，加密文件锁 | Python |
+| DownList | [https://github.com/xxxkjing/DownList](https://github.com/xxxkjing/DownList) | 无限制下载网易云音乐 | Python |
+| SoftLock | [https://github.com/xxxkjing/SoftLock](https://github.com/xxxkjing/SoftLock) | 研究性学习成果，加密文件锁 | Python |
 
+## 神秘网址
 
+自己搭建的一些服务，需要使用请联系我
+
+| 名称  | 地址  | 描述  |
+| --- | --- | --- |
+| Open Web UI | [https://xoui.dpdns.org/](https://xoui.dpdns.org/) | 一个美观的AI对话平台 |
+| Openlist | [https://xopl.dpdns.org/](https://xopl.dpdns.org/) | 一个挂载WebDav的云盘 |
