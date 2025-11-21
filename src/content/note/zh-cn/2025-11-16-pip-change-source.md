@@ -11,7 +11,7 @@ toc: true
 只需要打开终端输入以下命令：
 
 ```bash
-pip install your-package -i <https://mirrors.aliyun.com/pypi/simple/>
+pip install your-package -i https://mirrors.aliyun.com/pypi/simple/
 ```
 
 其中的`your-package` 要替换成自己需要安装的库
@@ -21,7 +21,7 @@ pip install your-package -i <https://mirrors.aliyun.com/pypi/simple/>
 只需要打开终端输入以下命令：
 
 ```bash
-pip config --site set global.index-url <https://mirrors.aliyun.com/pypi/simple/>
+pip config --site set global.index-url https://mirrors.aliyun.com/pypi/simple/
 ```
 
 就会写入 pip 的配置文件中，下载软件速度提高
