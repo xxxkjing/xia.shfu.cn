@@ -1,11 +1,10 @@
 ---
 title: Markdown 扩展手册
-timestamp: 2024-07-21 00:00:00+00:00
-series: Astro
-tags: [Markup, Demo]
+timestamp: 2024-07-21
+tags:
+  - Markup
 description: 详细介绍主题中扩展的 Markdown 语法功能，包括 Ruby 注音、缩写、剧透文本等特殊标记语法。
 ---
-
 原本想使用我最喜欢的 [markdown-it](https://github.com/markdown-it/markdown-it) 作为 Markdown 渲染引擎。但为了适配 Astro，防止出现意外错误，还是妥协使用了 [remark](https://github.com/remarkjs/remark)。
 
 出于个人的使用习惯，添加了部分插件以实现语法扩展。
@@ -18,13 +17,13 @@ description: 详细介绍主题中扩展的 Markdown 语法功能，包括 Ruby 
 :ruby[拼音(pīn yīn)]
 ```
 
-:ruby[拼音(pīn yīn)]
+:ruby\[拼音(pīn yīn)\]
 
 ```
 :ruby[振り仮名（ふ　がな）]
 ```
 
-:ruby[振り仮名（ふ　がな）]
+:ruby\[振り仮名（ふ　がな）\]
 
 ## 遮罩
 
@@ -56,7 +55,7 @@ description: 详细介绍主题中扩展的 Markdown 语法功能，包括 Ruby 
 $e^{ix} = \cos x + i \sin x$
 ```
 
-$e^{ix} = \cos x + i \sin x$
+$e^{ix} = \\cos x + i \\sin x$
 
 ```
 $$
@@ -64,9 +63,7 @@ $$
 $$
 ```
 
-$$
-(f*g)(t)=\int f(\tau)g(t-\tau)d\tau
-$$
+$$ (f\*g)(t)=\\int f(\\tau)g(t-\\tau)d\\tau $$
 
 ## 脚注
 
@@ -77,14 +74,13 @@ Footnote[^1]
 [^1]: Footnote **can have markup**.
 ```
 
-Footnote[^1]
-[^1]: Footnote **can have markup**.
+Footnote\[^1\] \[^1\]: Footnote **can have markup**.
 
 ```
 Inline Footnote^[Inline information]
 ```
 
-Inline Footnote^[Inline information]
+Inline Footnote^\[Inline information\]
 
 ## 缩写
 
@@ -98,7 +94,7 @@ ABBR abbr xABBRx
 
 ABBR abbr xABBRx
 
-*[ABBR]: Abbreviation
+\*\[ABBR\]: Abbreviation
 
 ## GitHub Alerts
 
@@ -109,48 +105,42 @@ ABBR abbr xABBRx
 > 普通信息
 ```
 
-> [!NOTE]
-> 普通信息
+> \[!NOTE\] 普通信息
 
 ```
 > [!TIP]
 > 可选信息
 ```
 
-> [!TIP]
-> 可选信息
+> \[!TIP\] 可选信息
 
 ```
 > [!IMPORTANT]
 > 重要信息
 ```
 
-> [!IMPORTANT]
-> 重要信息
+> \[!IMPORTANT\] 重要信息
 
 ```
 > [!WARNING]
 > 风险信息
 ```
 
-> [!WARNING]
-> 风险信息
+> \[!WARNING\] 风险信息
 
 ```
 > [!CAUTION]
 > 警告信息
 ```
 
-> [!CAUTION]
-> 警告信息
+> \[!CAUTION\] 警告信息
 
 ```
 > [!NOTE/(･ρ･)ﾉ]
 > 自定义标题文字
 ```
 
-> [!NOTE/(･ρ･)ﾉ]
-> 自定义标题文字
+> \[!NOTE/(･ρ･)ﾉ\] 自定义标题文字
 
 ## 表格扩展
 
@@ -164,8 +154,8 @@ ABBR abbr xABBRx
 | 普通单元格 |       ^      || 普通单元格 |
 ```
 
-| 左对齐 | 居中 | 右对齐 | 居中 |
-|:- |:-:| -:| - |
-| 普通单元格 | 合并单元格 || 合并列 |
-| 普通单元格 | 2×2 单元格 ||^|
-| 普通单元格 | ^ || 普通单元格 |
+| 左对齐 | 居中  | 右对齐 | 居中  |
+| --- | --- | --- | --- |
+| 普通单元格 | 合并单元格 |     | 合并列 |
+| 普通单元格 | 2×2 单元格 |     | ^   |
+| 普通单元格 | ^   |     | 普通单元格 |
