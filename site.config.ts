@@ -1,6 +1,6 @@
 const config = {
-	title: "MetaIllusion的博客",
-	prologue: "I'll See You On The Dark Side Of The Moon",
+	title: "MetaIllusion 的博客",
+	prologue: "I'll see you on the dark side of the moon",
 	author: {
 		name: "MetaIllusion",
 		email: "xkjing.xiajing@gmail.com",
