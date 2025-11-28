@@ -1,8 +1,10 @@
+---
+---
 ## MetaIllusion
 
 关于网络名称，和 Meta 公司没有半点关系，仅仅是有次做梦想到的
 
-而站点的签名：_I'll see you on the dark side of the moon_ 其实是从 Brain Damage 这首歌中截取的歌词，向所有人强推这首歌以及它的专辑。
+站点签名是从 Brain Damage 这首歌中截取的歌词，向所有人强推这首歌以及它的专辑。
 
 联系：[Email](mailto:xkjing.xiajing@gmail.com) 或者 [Github](https://github.com/xxxkjing)
 
