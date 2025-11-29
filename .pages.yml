@@ -89,10 +89,6 @@ content:
     type: file
     path: src/content/information/zh-cn/introduction.md
     fields:
-      - name: timestamp
-        label: Timestamp
-        type: date
-        required: true
       - name: body
         label: Body
         type: rich-text
@@ -102,10 +98,6 @@ content:
     type: file
     path: src/content/information/zh-cn/policy.md
     fields:
-      - name: timestamp
-        label: Timestamp
-        type: date
-        required: true
       - name: body
         label: Body
         type: rich-text
@@ -115,10 +107,6 @@ content:
     type: file
     path: src/content/information/zh-cn/roll.md
     fields:
-      - name: timestamp
-        label: Timestamp
-        type: date
-        required: true
       - name: body
         label: Body
         type: rich-text

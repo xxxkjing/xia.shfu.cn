@@ -52,6 +52,7 @@
         "@unocss/transformer-variant-group": "^66.5.4",
         "astro": "^5.15.4",
         "astro-icon": "^1.1.5",
+        "astro-seo": "^0.8.4",
         "feed": "^5.1.0",
         "hastscript": "^9.0.1",
         "luxon": "^3.7.2",

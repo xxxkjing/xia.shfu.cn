@@ -8,6 +8,7 @@ import TOC from "$components/note/TOC.astro";
 import Position from "$components/Position.astro";
 import Sensitive from "$components/Sensitive.svelte";
 import Comment from "$components/Comment.astro";
+import { getArticleSEO, getArticleSchema, getBreadcrumbSchema } from "$utils/seo";
 
 export async function getStaticPaths() {
 	// Get all notes excluding drafts
@@ -60,9 +61,24 @@ for (const item of headings) {
 
 	stack.push(heading);
 }
+
+// 生成 SEO 配置
+const seoConfig = getArticleSEO(Astro.site!, Astro.url.pathname, jotting);
+
+// 生成文章结构化数据
+const articleSchema = getArticleSchema(Astro.site!, Astro.url.pathname, jotting);
+
+// 生成面包屑导航
+const breadcrumbSchema = getBreadcrumbSchema(Astro.site!, [
+	{ name: "首页", url: "/" },
+	{ name: "随笔", url: "/jotting" },
+	{ name: jotting.data.title, url: Astro.url.pathname }
+]);
 ---
 
-<Base title={jotting.data.title} description={jotting.data.description} article={{ timestamp: jotting.data.timestamp, tags: jotting.data.tags }}>
+<Base title={jotting.data.title} description={jotting.data.description} article={{ timestamp: jotting.data.timestamp, tags: jotting.data.tags }} seoConfig={seoConfig}>
+	<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 	<main class="flex flex-col gap-6">
 		<header class="flex flex-col gap-4">
 			<h1 class="text-3xl">{jotting.data.title}</h1>

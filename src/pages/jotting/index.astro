@@ -3,6 +3,10 @@ import { getCollection } from "astro:content";
 import Base from "$layouts/Base.astro";
 import Jotting from "$components/Jotting.svelte";
 import Icon from "$components/Icon.astro";
+import { getListSEO } from "$utils/seo";
+
+// 生成列表页 SEO 配置
+const seoConfig = getListSEO(Astro.site!, Astro.url.pathname, "随笔");
 
 const jottings = await getCollection("jotting", jotting => {
 	// Filter by publication status and locale
@@ -28,7 +32,7 @@ let list = jottings.map(jotting => ({
 const tags = Array.from(new Set(jottings.flatMap(jotting => jotting.data.tags).filter(Boolean))).sort();
 ---
 
-<Base title="随笔">
+<Base title="随笔" seoConfig={seoConfig}>
 	<main class="flex flex-col grow">
 		<Jotting client:load jottings={list} {tags}>
 			<Icon name="lucide:flag-triangle-right" slot="top" />

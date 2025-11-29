@@ -1,29 +1,61 @@
 ---
-const { title, subtitle, description, author, article } = Astro.props;
+import { SEO } from "astro-seo";
+import type { SEOConfig } from "$utils/seo";
+
+const { title, subtitle, description, author, article, seoConfig } = Astro.props;
 
 // Locale-specific Noto Serif font mappings for Google Fonts
 const notoFonts: Record<string, string> = {
 	"zh-cn": "Noto+Serif+SC",
 	ja: "Noto+Serif+JP"
 };
+
+// 构建完整标题
+const fullTitle = subtitle ? `${subtitle} | ${title}` : title;
+
+// 使用传入的 seoConfig 或构建默认配置
+const seo: SEOConfig = seoConfig || {
+	title: fullTitle,
+	description: description,
+	canonical: new URL(Astro.url.pathname, Astro.site).toString(),
+	openGraph: {
+		basic: {
+			title: fullTitle,
+			type: (article && "article") || "website",
+			image: new URL("/favicon-96x96.png", Astro.site).toString(),
+			url: new URL(Astro.url.pathname, Astro.site).toString()
+		},
+		optional: {
+			description: description,
+			locale: "zh_CN",
+			siteName: title
+		},
+		...(article && {
+			article: {
+				publishedTime: article.timestamp.toISOString(),
+				section: article.section,
+				tags: article.tags,
+				authors: [author]
+			}
+		})
+	}
+};
 ---
 
 <html lang="zh-cn">
 	<head>
-		<title>{subtitle && `${subtitle} |`} {title}</title>
-		<meta name="description" content={description} />
+		<SEO
+			title={seo.title}
+			description={seo.description}
+			canonical={seo.canonical}
+			noindex={seo.noindex}
+			nofollow={seo.nofollow}
+			openGraph={seo.openGraph}
+		/>
 
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-
-		<meta property="og:title" content={`${subtitle && `${subtitle} | `}${title}`} />
-		<meta property="og:type" content={(article && "article") || "website"} />
-		<meta property="og:image" content={new URL("/favicon.svg", Astro.site)} />
-		<meta property="og:description" content={description} />
-		<meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
-
-		{article && [<meta property="article:author" content={author} />, <meta property="article:published_time" content={article.timestamp.toISOString()} />, article.section && <meta property="article:section" content={article.section} />, article.tags?.map((tag: string) => <meta property="article:tag" content={tag} />)]}
 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
