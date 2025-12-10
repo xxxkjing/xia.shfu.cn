@@ -1,18 +1,25 @@
+---
+---
 ## MetaIllusion
 
-关于网络名称，和 Meta 公司没有半点关系，仅仅是有次做梦想到的
+MetaIllusion，大概是元宇宙中的一片残影罢
 
-而站点的签名：_I'll see you on the dark side of the moon_ 其实是从 Brain Damage 这首歌中截取的歌词，向所有人强推这首歌以及它的专辑。
+站点的签名：_I'll see you on the dark side of the moon_ 从 Brain Damage 中截取的歌词，向所有人推荐这首歌以及它所在的专辑 _The Darkside of the Moon_ 。
 
-联系：[Email](mailto:xkjing.xiajing@gmail.com) 或者 [Github](https://github.com/xxxkjing)
+> And if the cloudbursts thunder in your ear  
+> You shout and no one seems to hear  
+> And if the band you're in starts playing different tunes  
+> I'll see you on the dark side of the moon!
+> 
+> \-- Pink Floyd
 
-## Indie Developer 独立开发者
+## 独立开发者
 
 我是一名信息技术爱好者，也是一名独立的开发者，目前就读于PFLS，正在尝试努力学习，积极向上
 
 `Python`，`JavaScript`，`H5`，`PHP`，`Linux`，`单片机` ，`C++`样样不通
 
-目前处于备战高考阶段，不一定能够长期在网络上活跃，消息会一段时间后才回，望见谅
+目前处于备战高考阶段，不一定能够长期在网络上活跃，但常看：[Email](mailto:xkjing.xiajing@gmail.com) 、 [Github](https://github.com/xxxkjing) 、[Linux.do](http://Linux.do) ，可以通过这些方式联系我
 
 !!但你可以随时来高二一班找我玩！!!
 
