@@ -1,12 +1,12 @@
 const config = {
-	title: "MetaIllusion的博客",
-	prologue: "I'll See You On The Dark Side Of The Moon",
+	title: "xkjing",
+	prologue: "The Lunatic Is On The Grass",
 	author: {
-		name: "MetaIllusion",
+		name: "xkjing",
 		email: "xkjing.xiajing@gmail.com",
 		link: "https://xia.shfu.cn"
 	},
-	description: "用博客，记录一个高中生的生活",
+	description: "记录，为了纪念",
 	copyright: {
 		type: "CC BY-NC-ND 4.0",
 		year: "2025"
