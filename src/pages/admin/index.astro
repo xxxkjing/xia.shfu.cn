@@ -1,0 +1,65 @@
+---
+import { getCollection } from "astro:content";
+import Base from "$layouts/Base.astro";
+
+const notes = await getCollection("note");
+const jottings = await getCollection("jotting");
+
+const normalize = (type: "note" | "jotting", list: any[]) =>
+	list
+		.filter(item => item.id.startsWith("zh-cn/"))
+		.map(item => ({
+			type,
+			id: item.id,
+			title: item.data.title,
+			timestamp: item.data.timestamp,
+			draft: item.data.draft
+		}))
+		.sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
+
+const rows = [...normalize("note", notes), ...normalize("jotting", jottings)].sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
+---
+
+<Base title="Admin">
+	<main class="flex flex-col gap-6">
+		<header class="flex items-center justify-between flex-wrap gap-2">
+			<h1 class="text-3xl font-bold">内容管理</h1>
+			<div class="flex gap-2">
+				<a href="/admin/edit?type=note" class="tool-btn">新建笔记</a>
+				<a href="/admin/edit?type=jotting" class="tool-btn">新建随笔</a>
+				<form method="post" action="/api/admin/logout"><button type="submit" class="tool-btn">退出登录</button></form>
+			</div>
+		</header>
+
+		<section class="flex flex-col gap-2">
+			{rows.map(row => (
+				<a href={`/admin/edit?type=${row.type}&id=${encodeURIComponent(row.id)}`} class="row">
+					<span class="font-mono text-sm c-secondary">[{row.type}]</span>
+					<span>{row.title}</span>
+					<span class="ml-a text-sm c-secondary">{row.timestamp.toLocaleDateString()} {row.draft ? "· 草稿" : ""}</span>
+				</a>
+			))}
+		</section>
+	</main>
+</Base>
+
+<style lang="less">
+	.tool-btn,
+	.row {
+		border: 1px solid var(--secondary-color);
+		border-radius: 0.35rem;
+		padding: 0.45rem 0.6rem;
+		transition: all 0.12s ease-in-out;
+	}
+
+	.tool-btn:hover,
+	.row:hover {
+		background: var(--block-color);
+	}
+
+	.row {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+	}
+</style>
