@@ -3,16 +3,16 @@ timestamp: 2025-11-30
 ---
 ## xkjing
 
+> Vivat per Verba
+> 笔尖所及，即是永恒
+
 xkjing，无非只是元宇宙中的一片残影罢
 
-站点的签名：_The Lunatic Is On The Grass_ 从 Brain Damage 中截取的歌词，向所有人推荐这首歌以及它所在的专辑 _The Darkside of the Moon_ 。
+站点的原签名：_The Lunatic Is On The Grass_ 从 Brain Damage 中截取的歌词，向所有人推荐这首歌以及它所在的专辑 _The Darkside of the Moon_ 。
 
 > The lunatic is on the grass
-> 
 > The lunatic is on the grass
-> 
 > Remembering games and daisy chains and laughs
-> 
 > Got to keep the loonies on the path
 > 
 > ......
