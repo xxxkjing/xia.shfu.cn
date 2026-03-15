@@ -75,7 +75,8 @@ const randomLinks = (await getCollection("note", item => !item.data.draft && ite
 	.filter(item => item.id.startsWith("zh-cn/"))
 	.map(item => ({
 		href: "/note/" + item.id.split("/").slice(1).join("/"),
-		title: item.data.title
+		title: item.data.title,
+		tags: item.data.tags
 	}));
 const breadcrumbSchema = getBreadcrumbSchema(Astro.site!, [
 	{ name: "首页", url: "/" },
@@ -87,7 +88,7 @@ const breadcrumbSchema = getBreadcrumbSchema(Astro.site!, [
 <Base title={note.data.title} description={note.data.description} article={{ timestamp: note.data.timestamp, section: note.data.series, tags: note.data.tags }} seoConfig={seoConfig}>
 	<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
 	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
-	<main class="flex flex-col gap-6">
+	<main class="flex flex-col gap-6 min-h-[70vh]">
 		<header class="flex flex-col gap-4">
 			<h1 class="text-3xl">{note.data.title}</h1>
 			<div class="flex flex-col gap-3 sm:flex-row children:(flex items-center gap-1 text-3.5 c-secondary)">
@@ -131,7 +132,9 @@ const breadcrumbSchema = getBreadcrumbSchema(Astro.site!, [
 			</div>
 		</Sensitive>
 
-		<RandomPostLinks links={randomLinks} label="笔记" />
+		<section class="mt-a pt-6">
+			<RandomPostLinks links={randomLinks} />
+		</section>
 		<Position locale="zh-cn" />
 	</main>
 </Base>
