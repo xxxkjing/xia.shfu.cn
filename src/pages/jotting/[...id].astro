@@ -7,7 +7,6 @@ import Icon from "$components/Icon.astro";
 import TOC from "$components/note/TOC.astro";
 import Position from "$components/Position.astro";
 import Sensitive from "$components/Sensitive.svelte";
-import Comment from "$components/Comment.astro";
 import { getArticleSEO, getArticleSchema, getBreadcrumbSchema } from "$utils/seo";
 
 export async function getStaticPaths() {
@@ -116,6 +115,5 @@ const breadcrumbSchema = getBreadcrumbSchema(Astro.site!, [
 		</Sensitive>
 
 		<Position locale="zh-cn" />
-		<Comment />
 	</main>
 </Base>
