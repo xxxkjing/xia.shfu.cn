@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+import Base from "$layouts/Base.astro";
+
+const notes = (await getCollection("note", item => !item.data.draft))
+	.filter(item => item.id.startsWith("zh-cn/"))
+	.sort((a, b) => b.data.timestamp.getTime() - a.data.timestamp.getTime());
+const jottings = (await getCollection("jotting", item => !item.data.draft))
+	.filter(item => item.id.startsWith("zh-cn/"))
+	.sort((a, b) => b.data.timestamp.getTime() - a.data.timestamp.getTime());
+---
+
+<Base title="CMS 管理后台" description="Admin CMS">
+	<main class="flex flex-col gap-6">
+		<section class="flex items-center justify-between">
+			<h1 class="text-3xl">CMS 后台</h1>
+			<button id="logout" class="b b-solid b-weak px-3 py-1 rd">退出登录</button>
+		</section>
+
+		<section class="flex flex-col gap-2">
+			<h2 class="text-xl">新建内容</h2>
+			<div class="flex gap-3">
+				<a class="b b-solid b-primary px-3 py-2 rd" href="/admin/edit?collection=note">新建笔记</a>
+				<a class="b b-solid b-primary px-3 py-2 rd" href="/admin/edit?collection=jotting">新建随笔</a>
+			</div>
+		</section>
+
+		<section class="flex flex-col gap-3">
+			<h2 class="text-xl">笔记列表</h2>
+			<ul class="flex flex-col gap-2">
+				{notes.map(item => <li><a class="link" href={`/admin/edit?collection=note&id=${encodeURIComponent(item.id)}`}>{item.data.title}</a></li>)}
+			</ul>
+		</section>
+
+		<section class="flex flex-col gap-3">
+			<h2 class="text-xl">随笔列表</h2>
+			<ul class="flex flex-col gap-2">
+				{jottings.map(item => <li><a class="link" href={`/admin/edit?collection=jotting&id=${encodeURIComponent(item.id)}`}>{item.data.title}</a></li>)}
+			</ul>
+		</section>
+	</main>
+
+	<script>
+		document.getElementById("logout")?.addEventListener("click", async () => {
+			await fetch("/api/admin/logout", { method: "POST" });
+			location.href = "/admin/login";
+		});
+	</script>
+</Base>
