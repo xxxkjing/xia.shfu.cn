@@ -1,0 +1,63 @@
+---
+import { readFile } from "node:fs/promises";
+import { getEntry } from "astro:content";
+import { parse as parseYaml } from "yaml";
+import Base from "$layouts/Base.astro";
+import Editor from "$components/admin/Editor.svelte";
+
+const collectionParam = Astro.url.searchParams.get("collection");
+const id = Astro.url.searchParams.get("id");
+const collection = collectionParam === "jotting" ? "jotting" : "note";
+
+function toLocalDateTime(value: Date | string | undefined): string {
+	if (!value) return new Date().toISOString().slice(0, 16);
+	const date = value instanceof Date ? value : new Date(value);
+	return new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+}
+
+function parseDocument(markdown: string) {
+	const match = markdown.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+	if (!match) return { data: {}, body: markdown };
+	const data = (parseYaml(match[1]) ?? {}) as Record<string, unknown>;
+	return { data, body: match[2] ?? "" };
+}
+
+let path = `src/content/${collection}/zh-cn/${Date.now()}.md`;
+let body = "";
+let metadata: Record<string, any> = {
+	title: "",
+	timestamp: toLocalDateTime(new Date()),
+	tags: [],
+	description: "",
+	draft: true,
+	top: 0,
+	sensitive: false,
+	...(collection === "note" ? { series: "", toc: true } : {})
+};
+
+if (id) {
+	const entry = await getEntry(collection, id);
+	if (entry) {
+		path = `src/content/${collection}/${id}.md`;
+		const raw = await readFile(path, "utf-8");
+		const parsed = parseDocument(raw);
+		body = parsed.body.trimStart();
+		metadata = {
+			...metadata,
+			...parsed.data,
+			timestamp: toLocalDateTime((parsed.data.timestamp as string | undefined) ?? entry.data.timestamp)
+		};
+	}
+}
+---
+
+<Base title="编辑文章" description="Admin editor">
+	<main class="flex flex-col gap-4">
+		<header class="flex items-center justify-between">
+			<h1 class="text-3xl">编辑器</h1>
+			<a href="/admin" class="link">返回后台</a>
+		</header>
+
+		<Editor collection={collection} initialPath={path} initialBody={body} initialMetadata={metadata} client:load />
+	</main>
+</Base>
