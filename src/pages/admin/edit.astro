@@ -1,0 +1,55 @@
+---
+import { getEntry } from "astro:content";
+import Base from "$layouts/Base.astro";
+import Editor from "$components/admin/Editor.svelte";
+
+const typeParam = Astro.url.searchParams.get("type");
+const idParam = Astro.url.searchParams.get("id");
+
+const collectionType = typeParam === "jotting" ? "jotting" : "note";
+const entryId = idParam ? decodeURIComponent(idParam) : "";
+
+const entry = entryId ? await getEntry(collectionType, entryId) : null;
+
+const now = new Date();
+const yyyy = now.getFullYear();
+const mm = String(now.getMonth() + 1).padStart(2, "0");
+const dd = String(now.getDate()).padStart(2, "0");
+
+const initialPath = entry ? `src/content/${collectionType}/${entry.id}.md` : `src/content/${collectionType}/zh-cn/${yyyy}-${mm}-${dd}-new-post.md`;
+
+const initialMeta = entry
+	? {
+			title: entry.data.title,
+			timestamp: entry.data.timestamp,
+			tags: entry.data.tags,
+			description: entry.data.description,
+			draft: entry.data.draft,
+			sensitive: entry.data.sensitive,
+			top: entry.data.top,
+			series: collectionType === "note" ? (entry.data as any).series : undefined,
+			toc: collectionType === "note" ? (entry.data as any).toc : undefined
+		}
+	: {
+			title: "",
+			timestamp: now,
+			tags: [],
+			description: "",
+			draft: true,
+			sensitive: false,
+			top: 0,
+			series: "",
+			toc: false
+		};
+---
+
+<Base title="Admin Edit">
+	<main class="flex flex-col gap-4">
+		<header class="flex items-center justify-between">
+			<h1 class="text-2xl font-bold">{entry ? "编辑文章" : "新建文章"}</h1>
+			<a href="/admin" class="text-sm link">返回列表</a>
+		</header>
+
+		<Editor client:load collectionType={collectionType} entryId={entryId} initialPath={initialPath} initialBody={(entry as any)?.body ?? ""} initialMeta={initialMeta} />
+	</main>
+</Base>

@@ -1,0 +1,49 @@
+---
+import Base from "$layouts/Base.astro";
+import { ADMIN_COOKIE_NAME, createAdminSession } from "$utils/admin-auth";
+
+const runtimeEnv = (Astro.locals as { runtime?: { env?: Record<string, string | undefined> } }).runtime?.env;
+const env = runtimeEnv ?? process.env;
+
+let error = "";
+
+if (Astro.request.method === "POST") {
+	const formData = await Astro.request.formData();
+	const username = String(formData.get("username") ?? "");
+	const password = String(formData.get("password") ?? "");
+
+	if (username === env.ADMIN_USERNAME && password === env.ADMIN_PASSWORD) {
+		const token = createAdminSession(username, env);
+		Astro.cookies.set(ADMIN_COOKIE_NAME, token, {
+			path: "/",
+			httpOnly: true,
+			secure: Astro.url.protocol === "https:",
+			sameSite: "lax",
+			maxAge: 60 * 60 * 8
+		});
+		return Astro.redirect("/admin");
+	}
+
+	error = "用户名或密码错误，请重试。";
+}
+---
+
+<Base title="Admin Login">
+	<main class="max-w-440px mx-a py-12 flex flex-col gap-6">
+		<h1 class="text-2xl font-bold">后台登录</h1>
+		<form method="post" class="flex flex-col gap-4 p-5 b b-solid b-secondary rd-2">
+			<label class="flex flex-col gap-1">
+				<span>用户名</span>
+				<input type="text" name="username" required class="px-3 py-2 b b-solid b-weak rd-1 bg-transparent" />
+			</label>
+			<label class="flex flex-col gap-1">
+				<span>密码</span>
+				<input type="password" name="password" required class="px-3 py-2 b b-solid b-weak rd-1 bg-transparent" />
+			</label>
+			{
+				error && <p class="text-red-500 text-sm">{error}</p>
+			}
+			<button type="submit" class="justify-center py-2 b b-solid b-secondary rd-1 hover:(bg-primary c-background) transition-colors">登录</button>
+		</form>
+	</main>
+</Base>
