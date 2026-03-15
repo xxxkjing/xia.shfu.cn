@@ -1,6 +1,5 @@
 ---
 import { SEO } from "astro-seo";
-import Analytics from "@vercel/analytics/astro";
 import type { SEOConfig } from "$utils/seo";
 
 const { title, subtitle, description, author, article, seoConfig } = Astro.props;
@@ -82,6 +81,5 @@ const seo: SEOConfig = seoConfig || {
 	</head>
 	<body>
 		<slot />
-		<Analytics />
 	</body>
 </html>
