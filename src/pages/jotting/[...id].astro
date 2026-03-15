@@ -6,8 +6,8 @@ import Base from "$layouts/Base.astro";
 import Icon from "$components/Icon.astro";
 import TOC from "$components/note/TOC.astro";
 import Position from "$components/Position.astro";
+import RandomPostLinks from "$components/RandomPostLinks.astro";
 import Sensitive from "$components/Sensitive.svelte";
-import Comment from "$components/Comment.astro";
 import { getArticleSEO, getArticleSchema, getBreadcrumbSchema } from "$utils/seo";
 
 export async function getStaticPaths() {
@@ -69,6 +69,13 @@ const seoConfig = getArticleSEO(Astro.site!, Astro.url.pathname, jotting);
 const articleSchema = getArticleSchema(Astro.site!, Astro.url.pathname, jotting);
 
 // 生成面包屑导航
+
+const randomLinks = (await getCollection("jotting", item => !item.data.draft && item.id !== jotting.id))
+	.filter(item => item.id.startsWith("zh-cn/"))
+	.map(item => ({
+		href: "/jotting/" + item.id.split("/").slice(1).join("/"),
+		title: item.data.title
+	}));
 const breadcrumbSchema = getBreadcrumbSchema(Astro.site!, [
 	{ name: "首页", url: "/" },
 	{ name: "随笔", url: "/jotting" },
@@ -115,7 +122,7 @@ const breadcrumbSchema = getBreadcrumbSchema(Astro.site!, [
 			</div>
 		</Sensitive>
 
+		<RandomPostLinks links={randomLinks} />
 		<Position locale="zh-cn" />
-		<Comment />
 	</main>
 </Base>
