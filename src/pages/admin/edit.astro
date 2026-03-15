@@ -1,0 +1,32 @@
+---
+import { readFile } from "node:fs/promises";
+import { resolve } from "node:path";
+import Base from "$layouts/Base.astro";
+import Editor from "$components/admin/Editor.svelte";
+
+const collectionParam = Astro.url.searchParams.get("collection");
+const collection = collectionParam === "jotting" ? "jotting" : "note";
+const id = Astro.url.searchParams.get("id") || "";
+
+let initialPath = "";
+let initialContent = "";
+
+if (id) {
+	initialPath = `src/content/${collection}/${id}.md`;
+	try {
+		initialContent = await readFile(resolve(process.cwd(), initialPath), "utf-8");
+	} catch {
+		initialContent = "";
+	}
+}
+---
+
+<Base title="编辑文章">
+	<main class="flex flex-col gap-4">
+		<header class="flex items-center justify-between">
+			<h1 class="text-3xl font-bold">{id ? "编辑文章" : "新建文章"}</h1>
+			<a href="/admin" class="link">返回列表</a>
+		</header>
+		<Editor client:load collection={collection} initialPath={initialPath} initialContent={initialContent} />
+	</main>
+</Base>

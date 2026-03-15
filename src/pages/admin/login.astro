@@ -1,0 +1,51 @@
+---
+import Base from "$layouts/Base.astro";
+---
+
+<Base title="后台登录" description="CMS 后台登录">
+	<main class="mx-a w-full max-w-120 mt-8">
+		<section class="b b-solid b-weak rd-2 p-5 flex flex-col gap-4">
+			<h1 class="text-2xl font-bold">CMS 登录</h1>
+			<p class="c-secondary text-sm">请输入管理员账号密码继续。</p>
+			<form id="login-form" class="flex flex-col gap-3">
+				<label class="flex flex-col gap-1">
+					<span>用户名</span>
+					<input name="username" class="px-3 py-2 b b-solid b-weak rd-1 bg-transparent" required />
+				</label>
+				<label class="flex flex-col gap-1">
+					<span>密码</span>
+					<input name="password" type="password" class="px-3 py-2 b b-solid b-weak rd-1 bg-transparent" required />
+				</label>
+				<button class="px-3 py-2 rd-1 bg-primary c-background justify-center" type="submit">登录</button>
+			</form>
+			<p id="login-message" class="text-sm c-remark"></p>
+		</section>
+	</main>
+
+	<script>
+		const form = document.getElementById("login-form") as HTMLFormElement | null;
+		const message = document.getElementById("login-message") as HTMLParagraphElement | null;
+
+		form?.addEventListener("submit", async event => {
+			event.preventDefault();
+			if (!message) return;
+			const data = new FormData(form);
+			const username = String(data.get("username") || "");
+			const password = String(data.get("password") || "");
+			message.textContent = "登录中...";
+
+			const response = await fetch("/api/admin/login", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ username, password })
+			});
+			const result = await response.json();
+			if (!response.ok || !result.ok) {
+				message.textContent = result.message || "登录失败";
+				return;
+			}
+
+			location.href = "/admin";
+		});
+	</script>
+</Base>

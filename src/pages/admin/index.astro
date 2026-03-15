@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+import Base from "$layouts/Base.astro";
+
+const notes = (await getCollection("note", item => !item.data.draft && item.id.startsWith("zh-cn/"))).sort(
+	(a, b) => b.data.timestamp.getTime() - a.data.timestamp.getTime()
+);
+const jottings = (await getCollection("jotting", item => !item.data.draft && item.id.startsWith("zh-cn/"))).sort(
+	(a, b) => b.data.timestamp.getTime() - a.data.timestamp.getTime()
+);
+---
+
+<Base title="CMS 后台">
+	<main class="flex flex-col gap-6">
+		<header class="flex items-center justify-between">
+			<h1 class="text-3xl font-bold">内容管理</h1>
+			<div class="flex gap-2 text-sm">
+				<a href="/admin/edit?collection=note" class="px-3 py-1 rd-1 b b-solid b-weak">新建笔记</a>
+				<a href="/admin/edit?collection=jotting" class="px-3 py-1 rd-1 b b-solid b-weak">新建随笔</a>
+			</div>
+		</header>
+
+		<section class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+			<article class="b b-solid b-weak rd-2 p-4">
+				<h2 class="mb-3">笔记</h2>
+				<ul class="flex flex-col gap-2">
+					{notes.map(note => (
+						<li class="flex items-center justify-between gap-2 text-sm">
+							<span class="truncate">{note.data.title}</span>
+							<a class="link whitespace-nowrap" href={`/admin/edit?collection=note&id=${encodeURIComponent(note.id)}`}>编辑</a>
+						</li>
+					))}
+				</ul>
+			</article>
+
+			<article class="b b-solid b-weak rd-2 p-4">
+				<h2 class="mb-3">随笔</h2>
+				<ul class="flex flex-col gap-2">
+					{jottings.map(jotting => (
+						<li class="flex items-center justify-between gap-2 text-sm">
+							<span class="truncate">{jotting.data.title}</span>
+							<a class="link whitespace-nowrap" href={`/admin/edit?collection=jotting&id=${encodeURIComponent(jotting.id)}`}>编辑</a>
+						</li>
+					))}
+				</ul>
+			</article>
+		</section>
+	</main>
+</Base>
