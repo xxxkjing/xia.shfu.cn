@@ -12,16 +12,27 @@ if (verifySessionToken(token)) {
 ---
 
 <App title="后台登录" subtitle="Admin Login" description="CMS admin login" author="admin">
-	<main class="mx-a w-[min(100%,460px)] min-h-screen flex items-center px-4">
-		<section class="w-full b b-solid b-secondary rd-2 p-6 flex flex-col gap-4">
-			<h1 class="text-2xl font-bold">后台登录</h1>
-			<p class="c-secondary text-sm">登录后可进入沉浸式编辑器，发布到 GitHub 仓库。</p>
-			<form id="login-form" class="flex flex-col gap-3">
-				<input id="username" placeholder="用户名" class="b b-solid b-weak rd-1 px-3 py-2 bg-transparent" required />
-				<input id="password" type="password" placeholder="密码" class="b b-solid b-weak rd-1 px-3 py-2 bg-transparent" required />
-				<button class="justify-center py-2 rd-1 bg-primary c-background font-bold" type="submit">登录</button>
+	<main class="login-page">
+		<section class="login-card">
+			<div class="brand">
+				<span class="dot"></span>
+				<h1>xkjing · Admin</h1>
+			</div>
+			<p class="desc">欢迎回来。登录后即可进入沉浸式编辑器，所见即所得地管理你的文章。</p>
+
+			<form id="login-form" class="form">
+				<label>
+					<span>用户名</span>
+					<input id="username" placeholder="请输入后台用户名" required />
+				</label>
+				<label>
+					<span>密码</span>
+					<input id="password" type="password" placeholder="请输入后台密码" required />
+				</label>
+				<button type="submit">登录后台</button>
 			</form>
-			<p id="error" class="text-sm c-red-6"></p>
+
+			<p id="error" class="error"></p>
 		</section>
 	</main>
 
@@ -51,4 +62,92 @@ if (verifySessionToken(token)) {
 			location.href = next;
 		});
 	</script>
+
+	<style lang="less">
+		.login-page {
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 1rem;
+			background:
+				radial-gradient(circle at 18% 18%, color-mix(in oklab, var(--block-color) 50%, transparent), transparent 30%),
+				radial-gradient(circle at 80% 20%, color-mix(in oklab, var(--block-color) 45%, transparent), transparent 26%),
+				var(--background-color);
+		}
+
+		.login-card {
+			width: min(100%, 500px);
+			border: 1px solid var(--weak-color);
+			border-radius: 0.8rem;
+			padding: 1.2rem;
+			background: color-mix(in oklab, var(--background-color) 92%, var(--block-color));
+			display: flex;
+			flex-direction: column;
+			gap: 0.9rem;
+			box-shadow: 0 10px 30px -20px var(--primary-color);
+		}
+
+		.brand {
+			display: flex;
+			align-items: center;
+			gap: 0.55rem;
+
+			.dot {
+				width: 8px;
+				height: 8px;
+				border-radius: 999px;
+				background: var(--primary-color);
+			}
+
+			h1 {
+				font-size: 1.15rem;
+				font-weight: 700;
+			}
+		}
+
+		.desc {
+			font-size: 0.9rem;
+			color: var(--secondary-color);
+			line-height: 1.6;
+		}
+
+		.form {
+			display: flex;
+			flex-direction: column;
+			gap: 0.7rem;
+
+			label {
+				display: flex;
+				flex-direction: column;
+				gap: 0.35rem;
+				font-size: 0.85rem;
+				color: var(--secondary-color);
+			}
+
+			input {
+				border: 1px solid var(--weak-color);
+				border-radius: 0.4rem;
+				padding: 0.6rem 0.65rem;
+				background: transparent;
+			}
+
+			button {
+				margin-top: 0.3rem;
+				display: flex;
+				justify-content: center;
+				padding: 0.62rem 0.8rem;
+				border-radius: 0.45rem;
+				background: var(--primary-color);
+				color: var(--background-color);
+				font-weight: 700;
+			}
+		}
+
+		.error {
+			font-size: 0.86rem;
+			color: #dc2626;
+			min-height: 1.1rem;
+		}
+	</style>
 </App>
