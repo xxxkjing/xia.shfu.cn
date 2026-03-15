@@ -1,12 +1,12 @@
 const config = {
 	title: "xkjing",
-	prologue: "The Lunatic Is On The Grass",
+	prologue: "Vivat per Verba",
 	author: {
 		name: "xkjing",
 		email: "xkjing.xiajing@gmail.com",
 		link: "https://xia.shfu.cn"
 	},
-	description: "记录，为了纪念",
+	description: "笔尖所及，即是永恒",
 	copyright: {
 		type: "CC BY-NC-ND 4.0",
 		year: "2025"
