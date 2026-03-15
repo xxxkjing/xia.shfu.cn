@@ -4,16 +4,22 @@ interface RandomPostLink {
 	title: string;
 }
 
-const { links = [] } = Astro.props as { links: RandomPostLink[] };
+const { links = [], label = "文章" } = Astro.props as { links: RandomPostLink[]; label?: string };
 ---
 
 <nav class="random-posts" data-random-posts={encodeURIComponent(JSON.stringify(links))}>
-	<a class="random-post" data-random-link="0" href={links[0]?.href ?? "#"}>{links[0]?.title ?? "暂无可跳转文章"}</a>
-	<a class="random-post" data-random-link="1" href={links[1]?.href ?? "#"}>{links[1]?.title ?? "暂无可跳转文章"}</a>
+	<a class="random-post" data-random-link="0" href={links[0]?.href ?? "#"}>
+		<span class="title">{links[0]?.title ?? "暂无可跳转文章"}</span>
+		<span class="meta">#{label}</span>
+	</a>
+	<a class="random-post" data-random-link="1" href={links[1]?.href ?? "#"}>
+		<span class="title">{links[1]?.title ?? "暂无可跳转文章"}</span>
+		<span class="meta">#{label}</span>
+	</a>
 </nav>
 
 <script>
-		const pickRandomPosts = (items: { href: string; title: string }[]) => {
+	const pickRandomPosts = (items: { href: string; title: string }[]) => {
 		if (!Array.isArray(items) || items.length === 0) return [];
 		const list = [...items];
 		for (let i = list.length - 1; i > 0; i--) {
@@ -31,14 +37,15 @@ const { links = [] } = Astro.props as { links: RandomPostLink[] };
 
 		anchors.forEach((anchor, index) => {
 			const target = picked[index];
-			if (!target) {
-				anchor.textContent = "暂无可跳转文章";
+			const title = anchor.querySelector(".title");
+			if (!target || !title) {
+				if (title) title.textContent = "暂无可跳转文章";
 				anchor.setAttribute("href", "#");
 				anchor.setAttribute("aria-disabled", "true");
 				return;
 			}
 
-			anchor.textContent = target.title;
+			title.textContent = target.title;
 			anchor.setAttribute("href", target.href);
 			anchor.setAttribute("title", target.title);
 			anchor.setAttribute("aria-label", `跳转到：${target.title}`);
@@ -51,7 +58,7 @@ const { links = [] } = Astro.props as { links: RandomPostLink[] };
 	.random-posts {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 0.75rem;
+		gap: 1.1rem;
 
 		@media (min-width: 640px) {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -59,25 +66,36 @@ const { links = [] } = Astro.props as { links: RandomPostLink[] };
 
 		.random-post {
 			display: flex;
-			align-items: center;
+			flex-direction: column;
+			align-items: flex-start;
 			justify-content: center;
+			gap: 0.2rem;
 
-			padding: 0.4rem 0.8rem;
-			min-height: 2.1rem;
-			border-bottom: 2px solid var(--primary-color);
-
-			font-family: var(--font-monospace);
-			font-size: 0.9rem;
-			text-align: center;
-			color: var(--secondary-color);
+			padding: 0.7rem 0.9rem;
+			min-height: 3.6rem;
+			border: 1px solid var(--secondary-color);
+			border-radius: 0.5rem;
 
 			transition:
 				color 0.12s ease-in-out,
-				background-color 0.12s ease-in-out;
+				background-color 0.12s ease-in-out,
+				border-color 0.12s ease-in-out;
+
+			.title {
+				font-size: 1.75rem;
+				line-height: 1.15;
+				word-break: break-word;
+				font-weight: 600;
+			}
+
+			.meta {
+				font-size: 0.88rem;
+				color: var(--remark-color);
+			}
 
 			&:hover {
-				color: var(--background-color);
-				background-color: var(--primary-color);
+				background-color: var(--block-color);
+				border-color: var(--primary-color);
 			}
 
 			&[aria-disabled="true"] {
