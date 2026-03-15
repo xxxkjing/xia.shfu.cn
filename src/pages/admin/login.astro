@@ -1,0 +1,54 @@
+---
+import App from "$layouts/App.astro";
+import { ADMIN_COOKIE_NAME, verifySessionToken } from "$utils/admin-auth";
+
+export const prerender = false;
+
+const next = Astro.url.searchParams.get("next") || "/admin";
+const token = Astro.cookies.get(ADMIN_COOKIE_NAME)?.value;
+if (verifySessionToken(token)) {
+	return Astro.redirect(next);
+}
+---
+
+<App title="后台登录" subtitle="Admin Login" description="CMS admin login" author="admin">
+	<main class="mx-a w-[min(100%,460px)] min-h-screen flex items-center px-4">
+		<section class="w-full b b-solid b-secondary rd-2 p-6 flex flex-col gap-4">
+			<h1 class="text-2xl font-bold">后台登录</h1>
+			<p class="c-secondary text-sm">登录后可进入沉浸式编辑器，发布到 GitHub 仓库。</p>
+			<form id="login-form" class="flex flex-col gap-3">
+				<input id="username" placeholder="用户名" class="b b-solid b-weak rd-1 px-3 py-2 bg-transparent" required />
+				<input id="password" type="password" placeholder="密码" class="b b-solid b-weak rd-1 px-3 py-2 bg-transparent" required />
+				<button class="justify-center py-2 rd-1 bg-primary c-background font-bold" type="submit">登录</button>
+			</form>
+			<p id="error" class="text-sm c-red-6"></p>
+		</section>
+	</main>
+
+	<script is:inline define:vars={{ next }}>
+		const form = document.querySelector("#login-form");
+		const error = document.querySelector("#error");
+
+		form?.addEventListener("submit", async event => {
+			event.preventDefault();
+			error.textContent = "";
+
+			const username = document.querySelector("#username")?.value?.trim();
+			const password = document.querySelector("#password")?.value;
+
+			const response = await fetch("/api/admin/login", {
+				method: "POST",
+				headers: { "content-type": "application/json" },
+				body: JSON.stringify({ username, password })
+			});
+			const result = await response.json().catch(() => ({ ok: false, error: "登录失败" }));
+
+			if (!response.ok || !result.ok) {
+				error.textContent = result.error || "登录失败";
+				return;
+			}
+
+			location.href = next;
+		});
+	</script>
+</App>
