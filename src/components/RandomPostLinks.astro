@@ -58,7 +58,7 @@ const { links = [], label = "文章" } = Astro.props as { links: RandomPostLink[
 	.random-posts {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 1.1rem;
+		gap: 0.75rem;
 
 		@media (min-width: 640px) {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -69,12 +69,12 @@ const { links = [], label = "文章" } = Astro.props as { links: RandomPostLink[
 			flex-direction: column;
 			align-items: flex-start;
 			justify-content: center;
-			gap: 0.2rem;
+			gap: 0.1rem;
 
-			padding: 0.7rem 0.9rem;
-			min-height: 3.6rem;
+			padding: 0.5rem 0.7rem;
+			min-height: 3rem;
 			border: 1px solid var(--secondary-color);
-			border-radius: 0.5rem;
+			border-radius: 0.4rem;
 
 			transition:
 				color 0.12s ease-in-out,
@@ -82,14 +82,14 @@ const { links = [], label = "文章" } = Astro.props as { links: RandomPostLink[
 				border-color 0.12s ease-in-out;
 
 			.title {
-				font-size: 1.75rem;
-				line-height: 1.15;
+				font-size: 1.05rem;
+				line-height: 1.3;
 				word-break: break-word;
 				font-weight: 600;
 			}
 
 			.meta {
-				font-size: 0.88rem;
+				font-size: 0.78rem;
 				color: var(--remark-color);
 			}
 
