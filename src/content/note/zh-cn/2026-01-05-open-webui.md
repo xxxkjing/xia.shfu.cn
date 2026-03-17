@@ -10,5 +10,7 @@ draft: false
 ---
 
 JWT (JSON Web Token)  设置小了
+
 JWT 是一种基于 JSON 的开放标准（RFC 7519），用于在双方之间安全地传输信息。
+
 Cookie过期
