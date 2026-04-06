@@ -1,0 +1,63 @@
+---
+import { getCollection } from "astro:content";
+import App from "$layouts/App.astro";
+import MediaManager from "$components/admin/MediaManager.svelte";
+import "$styles/global.less";
+
+export const prerender = false;
+
+const notes = (await getCollection("note", item => !item.data.draft && item.id.startsWith("zh-cn/"))).sort(
+	(a, b) => b.data.timestamp.getTime() - a.data.timestamp.getTime()
+);
+const jottings = (await getCollection("jotting", item => !item.data.draft && item.id.startsWith("zh-cn/"))).sort(
+	(a, b) => b.data.timestamp.getTime() - a.data.timestamp.getTime()
+);
+---
+
+<App title="CMS 后台" subtitle="Admin" description="Admin dashboard" author="admin">
+	<main class="mx-a w-[min(100%,1200px)] px-4 py-6 flex flex-col gap-6">
+		<header class="flex items-center justify-between">
+			<h1 class="text-2xl font-bold">内容管理</h1>
+			<div class="flex gap-2">
+				<a href="/admin/edit?type=note" class="b b-solid b-weak rd-1 px-3 py-1.5">新建笔记</a>
+				<a href="/admin/edit?type=jotting" class="b b-solid b-weak rd-1 px-3 py-1.5">新建随笔</a>
+				<button id="logout" class="b b-solid b-red-5 c-red-6 rd-1 px-3 py-1.5">退出登录</button>
+			</div>
+		</header>
+
+		<section class="grid gap-6 lg:grid-cols-2">
+			<div class="b b-solid b-weak rd-2 p-4">
+				<h2 class="font-bold mb-3">笔记（Note）</h2>
+				<ul class="flex flex-col gap-2 max-h-[60vh] overflow-y-auto">
+					{notes.map(item => (
+						<li class="flex items-center justify-between gap-2 b-b b-b-solid b-weak py-1">
+							<a class="link" href={`/admin/edit?type=note&id=${encodeURIComponent(item.id.split("/").slice(1).join("/"))}`}>{item.data.title}</a>
+							<small class="c-remark">{item.id}</small>
+						</li>
+					))}
+				</ul>
+			</div>
+
+			<div class="b b-solid b-weak rd-2 p-4">
+				<h2 class="font-bold mb-3">随笔（Jotting）</h2>
+				<ul class="flex flex-col gap-2 max-h-[60vh] overflow-y-auto">
+					{jottings.map(item => (
+						<li class="flex items-center justify-between gap-2 b-b b-b-solid b-weak py-1">
+							<a class="link" href={`/admin/edit?type=jotting&id=${encodeURIComponent(item.id.split("/").slice(1).join("/"))}`}>{item.data.title}</a>
+							<small class="c-remark">{item.id}</small>
+						</li>
+					))}
+				</ul>
+			</div>
+		</section>
+
+		<MediaManager client:load />
+	</main>
+
+	<script is:inline>
+		document.querySelector("#logout")?.addEventListener("click", async () => {
+			await fetch("/api/admin/logout", { method: "POST" });
+			location.href = "/admin/login";
+		});
+	</script>
+</App>
