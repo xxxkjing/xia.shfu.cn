@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import App from "$layouts/App.astro";
+import MediaManager from "$components/admin/MediaManager.svelte";
 import "$styles/global.less";
 
 export const prerender = false;
@@ -49,6 +50,8 @@ const jottings = (await getCollection("jotting", item => !item.data.draft && ite
 				</ul>
 			</div>
 		</section>
+
+		<MediaManager client:load />
 	</main>
 
 	<script is:inline>

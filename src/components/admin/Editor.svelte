@@ -18,7 +18,8 @@ type EditorInitialData = {
 type MarkdownTool = {
 	name: string;
 	description: string;
-	snippet: string;
+	snippet?: string;
+	action?: "upload-image";
 	keywords: string[];
 };
 
@@ -48,11 +49,20 @@ let error = $state("");
 let editorBodyRef = $state<HTMLTextAreaElement | null>(null);
 let slashQuery = $state("");
 let showTools = $state(false);
+let uploading = $state(false);
+let uploadError = $state("");
+let fileInputRef = $state<HTMLInputElement | null>(null);
 
 const markdownTools: MarkdownTool[] = [
 	{ name: "标题", description: "插入二级标题", snippet: "## 标题\n", keywords: ["heading", "title", "标题"] },
 	{ name: "链接", description: "插入超链接", snippet: "[链接文字](https://example.com)\n", keywords: ["link", "链接"] },
 	{ name: "图片", description: "插入图片", snippet: "![图片描述](https://example.com/image.png)\n", keywords: ["image", "图片"] },
+	{
+		name: "上传图片",
+		description: "上传图片后插入 Markdown",
+		action: "upload-image",
+		keywords: ["upload", "image", "上传", "图片", "图床"]
+	},
 	{ name: "代码块", description: "插入 fenced code block", snippet: "```bash\n# command\n```\n", keywords: ["code", "代码"] },
 	{ name: "提示块 Note", description: "GitHub Alert 提示块", snippet: "> [!NOTE]\n> 这里是提示内容\n", keywords: ["alert", "note", "提示"] },
 	{
@@ -129,6 +139,14 @@ const syncSlashState = () => {
 };
 
 const applyTool = (tool: MarkdownTool) => {
+	if (tool.action === "upload-image") {
+		showTools = false;
+		slashQuery = "";
+		fileInputRef?.click();
+		return;
+	}
+
+	if (!tool.snippet) return;
 	if (!editorBodyRef) return;
 	const cursor = editorBodyRef.selectionStart ?? body.length;
 	const before = body.slice(0, cursor);
@@ -147,6 +165,80 @@ const applyTool = (tool: MarkdownTool) => {
 		editorBodyRef.focus();
 		editorBodyRef.setSelectionRange(pos, pos);
 	});
+};
+
+const insertAtCursor = (snippet: string, removeSlash = false) => {
+	if (!editorBodyRef) {
+		body += snippet;
+		return;
+	}
+
+	const cursor = editorBodyRef.selectionStart ?? body.length;
+
+	if (removeSlash) {
+		const before = body.slice(0, cursor);
+		const line = before.slice(before.lastIndexOf("\n") + 1);
+		const match = line.match(/(?:^|\s)\/([\w-]*)$/);
+		if (match) {
+			const slashPos = line.lastIndexOf("/");
+			const replaceStart = before.length - line.length + slashPos;
+			body = body.slice(0, replaceStart) + snippet + body.slice(cursor);
+			requestAnimationFrame(() => {
+				if (!editorBodyRef) return;
+				const pos = replaceStart + snippet.length;
+				editorBodyRef.focus();
+				editorBodyRef.setSelectionRange(pos, pos);
+			});
+			return;
+		}
+	}
+
+	body = body.slice(0, cursor) + snippet + body.slice(cursor);
+	requestAnimationFrame(() => {
+		if (!editorBodyRef) return;
+		const pos = cursor + snippet.length;
+		editorBodyRef.focus();
+		editorBodyRef.setSelectionRange(pos, pos);
+	});
+};
+
+const uploadImage = async (file: File, removeSlash = false) => {
+	uploadError = "";
+	uploading = true;
+	try {
+		const formData = new FormData();
+		formData.append("file", file);
+		const response = await fetch("/api/admin/upload", { method: "POST", body: formData });
+		const result = await response.json().catch(() => ({ ok: false, error: "上传失败" }));
+		if (!response.ok || !result.ok || typeof result.markdown !== "string") {
+			uploadError = result.error || "上传失败";
+			return;
+		}
+		insertAtCursor(`${result.markdown}\n`, removeSlash);
+	} catch {
+		uploadError = "网络错误，请稍后重试";
+	} finally {
+		uploading = false;
+	}
+};
+
+const onFileInputChange = async (event: Event) => {
+	const target = event.currentTarget as HTMLInputElement;
+	const file = target.files?.[0];
+	if (!file) return;
+	await uploadImage(file, true);
+	target.value = "";
+};
+
+const onBodyPaste = async (event: ClipboardEvent) => {
+	const items = event.clipboardData?.items;
+	if (!items) return;
+	const imageItem = Array.from(items).find(item => item.type.startsWith("image/"));
+	if (!imageItem) return;
+	const file = imageItem.getAsFile();
+	if (!file) return;
+	event.preventDefault();
+	await uploadImage(file);
 };
 
 async function saveContent() {
@@ -239,6 +331,7 @@ async function saveContent() {
 					oninput={syncSlashState}
 					onkeyup={syncSlashState}
 					onclick={syncSlashState}
+					onpaste={onBodyPaste}
 					rows="15"
 					class="input font-mono"
 				></textarea>
@@ -259,9 +352,14 @@ async function saveContent() {
 			</div>
 
 			<div class="action-row">
+				<input bind:this={fileInputRef} type="file" accept="image/*" class="hidden-file" onchange={onFileInputChange} />
+				<button type="button" class="upload-btn" onclick={() => fileInputRef?.click()} disabled={uploading}>
+					{uploading ? "图片上传中..." : "上传图片"}
+				</button>
 				<button onclick={saveContent} class="save-btn" disabled={loading}>{loading ? "保存中..." : "保存并发布"}</button>
 				<span class="text-xs c-remark">{filePath}</span>
 			</div>
+			{#if uploadError}<p class="text-sm c-red-6">{uploadError}</p>{/if}
 			{#if message}<p class="text-sm c-green-6">{message}</p>{/if}
 			{#if error}<p class="text-sm c-red-6">{error}</p>{/if}
 		</div>
@@ -408,6 +506,19 @@ async function saveContent() {
 		background: var(--primary-color);
 		color: var(--background-color);
 		font-weight: 700;
+	}
+
+	.upload-btn {
+		display: flex;
+		justify-content: center;
+		padding: 0.5rem 1rem;
+		border-radius: 0.4rem;
+		border: 1px solid var(--weak-color);
+		background: var(--background-color);
+	}
+
+	.hidden-file {
+		display: none;
 	}
 
 	.preview {
