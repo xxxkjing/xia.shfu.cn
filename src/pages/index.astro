@@ -63,6 +63,10 @@ if (sections === "*" || sections.includes("jotting")) items = items.concat(jotti
 // Get the latest content for display
 const latest = items.sort((a, b) => b.data.timestamp.getTime() - a.data.timestamp.getTime())[0];
 
+// Pick random note and jotting for display
+const randomNote = notes.length ? notes[Math.floor(Math.random() * notes.length)] : undefined;
+const randomJotting = jottings.length ? jottings[Math.floor(Math.random() * jottings.length)] : undefined;
+
 // Get the latest preface for display
 const preface = prefaces[0];
 // Render preface content if available, otherwise use empty object
@@ -95,22 +99,68 @@ const { Content } = preface ? await render(preface) : ({} as any);
 				<footer class="flex items-center justify-center flex-wrap-reverse gap-10">
 					<Heatmap client:load {notes} {jottings} />
 
-					<blockquote class="flex-grow">
-						<h3>最新</h3>
-						<div class="flex flex-col sm:flex-row justify-between gap-1 mt-2">
-							<a href={`/${latest.type}/${latest.id.split("/").slice(1).join("/")}`} class="link">
-								{latest.data.series && `${latest.data.series} | `}
-								{latest.data.title}
-							</a>
-							<div class="flex gap-1">
-								{latest.data.tags?.map(tag => (
-									<span class="c-remark text-size-sm">#{tag}</span>
-								))}
+					<blockquote class="flex-grow flex flex-col gap-4">
+						<div>
+							<h3>最新</h3>
+							<div class="flex flex-col sm:flex-row justify-between gap-1 mt-2">
+								<a href={`/${latest.type}/${latest.id.split("/").slice(1).join("/")}`} class="link">
+									{latest.data.series && `${latest.data.series} | `}
+									{latest.data.title}
+								</a>
+								<div class="flex gap-1">
+									{latest.data.tags?.map(tag => (
+										<span class="c-remark text-size-sm">#{tag}</span>
+									))}
+								</div>
 							</div>
+							<time datetime={latest.data.timestamp.toISOString()} class="c-remark font-mono text-xs">
+								{Time(latest.data.timestamp)}
+							</time>
 						</div>
-						<time datetime={latest.data.timestamp.toISOString()} class="c-remark font-mono text-xs">
-							{Time(latest.data.timestamp)}
-						</time>
+
+						{
+							randomNote && (
+								<div>
+									<h3>随机笔记</h3>
+									<div class="flex flex-col sm:flex-row justify-between gap-1 mt-2">
+										<a href={`/note/${randomNote.id.split("/").slice(1).join("/")}`} class="link">
+											{randomNote.data.series && `${randomNote.data.series} | `}
+											{randomNote.data.title}
+										</a>
+										<div class="flex gap-1">
+											{randomNote.data.tags?.map(tag => (
+												<span class="c-remark text-size-sm">#{tag}</span>
+											))}
+										</div>
+									</div>
+									<time datetime={randomNote.data.timestamp.toISOString()} class="c-remark font-mono text-xs">
+										{Time(randomNote.data.timestamp)}
+									</time>
+								</div>
+							)
+						}
+
+						{
+							randomJotting && (
+								<div>
+									<h3>随机随笔</h3>
+									<div class="flex flex-col sm:flex-row justify-between gap-1 mt-2">
+										<a href={`/jotting/${randomJotting.id.split("/").slice(1).join("/")}`} class="link">
+											{randomJotting.data.series && `${randomJotting.data.series} | `}
+											{randomJotting.data.title}
+										</a>
+										<div class="flex gap-1">
+											{randomJotting.data.tags?.map(tag => (
+												<span class="c-remark text-size-sm">#{tag}</span>
+											))}
+										</div>
+									</div>
+									<time datetime={randomJotting.data.timestamp.toISOString()} class="c-remark font-mono text-xs">
+										{Time(randomJotting.data.timestamp)}
+									</time>
+								</div>
+							)
+						}
 					</blockquote>
 				</footer>
 			)
