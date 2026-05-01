@@ -1,0 +1,97 @@
+---
+import Base from "$layouts/Base.astro";
+import { ADMIN_COOKIE_NAME, verifySessionToken } from "$utils/admin-auth";
+
+export const prerender = false;
+
+const next = Astro.url.searchParams.get("next") || "/admin";
+const token = Astro.cookies.get(ADMIN_COOKIE_NAME)?.value;
+if (verifySessionToken(token)) {
+	return Astro.redirect(next);
+}
+---
+
+<Base title="后台登录" description="CMS admin login">
+	<main class="flex flex-col justify-center items-center grow pb-8 sm:pb-0">
+		<section class="login-card w-full max-w-520px flex flex-col gap-4">
+			<header class="flex flex-col gap-1.5">
+				<h1 class="text-2xl font-bold">后台登录</h1>
+				<p class="text-sm c-secondary">使用站点管理员账号登录，进入编辑后台。</p>
+			</header>
+
+			<form id="login-form" class="flex flex-col gap-3">
+				<label class="field">
+					<span>用户名</span>
+					<input id="username" placeholder="请输入后台用户名" required />
+				</label>
+				<label class="field">
+					<span>密码</span>
+					<input id="password" type="password" placeholder="请输入后台密码" required />
+				</label>
+				<button class="login-btn" type="submit">登录后台</button>
+			</form>
+			<p id="error" class="text-sm c-red-6 min-h-[1.25rem]"></p>
+		</section>
+	</main>
+
+	<script is:inline define:vars={{ next }}>
+		const form = document.querySelector("#login-form");
+		const error = document.querySelector("#error");
+
+		form?.addEventListener("submit", async event => {
+			event.preventDefault();
+			error.textContent = "";
+
+			const username = document.querySelector("#username")?.value?.trim();
+			const password = document.querySelector("#password")?.value;
+
+			const response = await fetch("/api/admin/login", {
+				method: "POST",
+				headers: { "content-type": "application/json" },
+				body: JSON.stringify({ username, password })
+			});
+			const result = await response.json().catch(() => ({ ok: false, error: "登录失败" }));
+
+			if (!response.ok || !result.ok) {
+				error.textContent = result.error || "登录失败";
+				return;
+			}
+
+			location.href = next;
+		});
+	</script>
+
+	<style lang="less">
+		.login-card {
+			border: 1px solid var(--weak-color);
+			border-radius: 0.65rem;
+			padding: 1rem;
+			background: color-mix(in oklab, var(--background-color) 94%, var(--block-color));
+		}
+
+		.field {
+			display: flex;
+			flex-direction: column;
+			gap: 0.35rem;
+			font-size: 0.85rem;
+			color: var(--secondary-color);
+
+			input {
+				border: 1px solid var(--weak-color);
+				border-radius: 0.45rem;
+				padding: 0.55rem 0.65rem;
+				background: transparent;
+			}
+		}
+
+		.login-btn {
+			display: flex;
+			justify-content: center;
+			padding: 0.6rem 0.8rem;
+			border-radius: 0.45rem;
+			background: var(--primary-color);
+			color: var(--background-color);
+			font-weight: 700;
+		}
+	</style>
+</Base>
