@@ -121,7 +121,6 @@ const { Content } = preface ? await render(preface) : ({} as any);
 						{
 							randomNote && (
 								<div>
-									<h3>随机笔记</h3>
 									<div class="flex flex-col sm:flex-row justify-between gap-1 mt-2">
 										<a href={`/note/${randomNote.id.split("/").slice(1).join("/")}`} class="link">
 											{randomNote.data.series && `${randomNote.data.series} | `}
@@ -143,7 +142,6 @@ const { Content } = preface ? await render(preface) : ({} as any);
 						{
 							randomJotting && (
 								<div>
-									<h3>随机随笔</h3>
 									<div class="flex flex-col sm:flex-row justify-between gap-1 mt-2">
 										<a href={`/jotting/${randomJotting.id.split("/").slice(1).join("/")}`} class="link">
 											{randomJotting.data.series && `${randomJotting.data.series} | `}
