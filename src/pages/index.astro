@@ -100,23 +100,25 @@ const { Content } = preface ? await render(preface) : ({} as any);
 					<Heatmap client:load {notes} {jottings} />
 
 					<blockquote class="flex-grow flex flex-col gap-4">
-						<div>
-							<h3>最新</h3>
-							<div class="flex flex-col sm:flex-row justify-between gap-1 mt-2">
-								<a href={`/${latest.type}/${latest.id.split("/").slice(1).join("/")}`} class="link">
-									{latest.data.series && `${latest.data.series} | `}
-									{latest.data.title}
-								</a>
-								<div class="flex gap-1">
-									{latest.data.tags?.map(tag => (
-										<span class="c-remark text-size-sm">#{tag}</span>
-									))}
-								</div>
-							</div>
-							<time datetime={latest.data.timestamp.toISOString()} class="c-remark font-mono text-xs">
-								{Time(latest.data.timestamp)}
-							</time>
-						</div>
+{/*
+<div>
+  <h3>最新</h3>
+  <div class="flex flex-col sm:flex-row justify-between gap-1 mt-2">
+    <a href={`/${latest.type}/${latest.id.split("/").slice(1).join("/")}`} class="link">
+      {latest.data.series && `${latest.data.series} |`}
+      {latest.data.title}
+    </a>
+    <div class="flex gap-1">
+      {latest.data.tags?.map(tag => (
+        <span class="c-remark text-size-sm">#{tag}</span>
+      ))}
+    </div>
+  </div>
+  <time datetime={latest.data.timestamp.toISOString()} class="c-remark font-mono text-xs">
+    {Time(latest.data.timestamp)}
+  </time>
+</div>
+*/}
 
 						{
 							randomNote && (
