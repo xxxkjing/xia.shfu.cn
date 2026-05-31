@@ -1,19 +1,20 @@
 import type { APIRoute } from "astro";
 
 export const GET: APIRoute = ({ site }) => {
-	const text = `
-User-agent: Googlebot
-User-agent: Bingbot
-User-agent: DuckDuckBot
-User-agent: archive.org_bot
+	const sitemap = new URL("sitemap-index.xml", site).toString();
+
+	const text = `User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api
 Disallow: /cdn-cgi
 
-User-agent: *
-Disallow: /
-
-Sitemap: ${new URL("sitemap-index.xml", site)}
+Sitemap: ${sitemap}
 `;
 
-	return new Response(text);
+	return new Response(text, {
+		headers: {
+			"Content-Type": "text/plain; charset=utf-8"
+		}
+	});
 };

@@ -110,7 +110,12 @@ export default defineConfig({
 	},
 	integrations: [
 		svelte(),
-		sitemap(),
+		sitemap({
+			filter: page => !page.includes("/admin") && !page.includes("/api"),
+			changefreq: "weekly",
+			priority: 0.7,
+			lastmod: new Date()
+		}),
 		swup({
 			globalInstance: true,
 			preload: false,

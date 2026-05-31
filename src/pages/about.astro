@@ -1,6 +1,13 @@
 ---
 import { getEntry, render } from "astro:content";
 import Base from "$layouts/Base.astro";
+import { getListSEO, getBreadcrumbSchema } from "$utils/seo";
+
+const seoConfig = getListSEO(Astro.site!, Astro.url.pathname, "关于", "关于 xkjing：个人简介、站点说明与相关名单。");
+const breadcrumbSchema = getBreadcrumbSchema(Astro.site!, [
+	{ name: "首页", url: "/" },
+	{ name: "关于", url: Astro.url.pathname }
+]);
 
 const introduction = await getEntry("information", "zh-cn/introduction");
 const roll = await getEntry("information", "zh-cn/roll");
@@ -23,7 +30,8 @@ const { Content: Roll } = roll ? await render(roll) : ({} as any);
 	}
 </style>
 
-<Base title="关于">
+<Base title="关于" seoConfig={seoConfig}>
+	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 	<main>
 		<article class="flex flex-col">
 			{

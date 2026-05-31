@@ -6,7 +6,7 @@ const config = {
 		email: "xkjing.xiajing@gmail.com",
 		link: "https://xia.shfu.cn"
 	},
-	description: "笔尖所及，即是永恒",
+	description: "xkjing 的个人博客，记录技术笔记、生活随笔、阅读思考与创作片段。笔尖所及，即是永恒。",
 	copyright: {
 		type: "CC BY-NC-ND 4.0",
 		year: "2025"

@@ -2,6 +2,13 @@
 import { getCollection } from "astro:content";
 import Time from "$utils/time";
 import Base from "$layouts/Base.astro";
+import { getListSEO, getBreadcrumbSchema } from "$utils/seo";
+
+const seoConfig = getListSEO(Astro.site!, Astro.url.pathname, "序言", "xkjing 博客的序言、站点说明与阶段性记录。");
+const breadcrumbSchema = getBreadcrumbSchema(Astro.site!, [
+	{ name: "首页", url: "/" },
+	{ name: "序言", url: Astro.url.pathname }
+]);
 
 const prefaces = (
 	await getCollection("preface", preface => {
@@ -14,7 +21,8 @@ const prefaces = (
 ).sort((a, b) => b.data.timestamp.getTime() - a.data.timestamp.getTime());
 ---
 
-<Base title="序言">
+<Base title="序言" seoConfig={seoConfig}>
+	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 	<main class="flex flex-col">
 		<h2>序言</h2>
 		<ul class="flex flex-col list-none">

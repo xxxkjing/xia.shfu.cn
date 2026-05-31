@@ -4,6 +4,8 @@ import Analytics from "@vercel/analytics/astro";
 import type { SEOConfig } from "$utils/seo";
 
 const { title, subtitle, description, author, article, seoConfig } = Astro.props;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const siteImage = new URL("/favicon-96x96.png", Astro.site).toString();
 
 // Locale-specific Noto Serif font mappings for Google Fonts
 const notoFonts: Record<string, string> = {
@@ -18,13 +20,13 @@ const fullTitle = subtitle ? `${subtitle} | ${title}` : title;
 const seo: SEOConfig = seoConfig || {
 	title: fullTitle,
 	description: description,
-	canonical: new URL(Astro.url.pathname, Astro.site).toString(),
+	canonical: canonicalUrl,
 	openGraph: {
 		basic: {
 			title: fullTitle,
 			type: (article && "article") || "website",
-			image: new URL("/favicon-96x96.png", Astro.site).toString(),
-			url: new URL(Astro.url.pathname, Astro.site).toString()
+			image: siteImage,
+			url: canonicalUrl
 		},
 		optional: {
 			description: description,
@@ -57,6 +59,11 @@ const seo: SEOConfig = seoConfig || {
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="author" content={author} />
+		<meta name="robots" content="index, follow, max-image-preview:large" />
+		<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)" />
+		<link rel="alternate" type="application/rss+xml" title={`${title} RSS`} href="/feed.xml" />
 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
