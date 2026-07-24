@@ -9,7 +9,10 @@ top: 0
 draft: false
 ---
 
-JWT (JSON Web Token)  设置太小了
+原因：JWT (JSON Web Token)  设置太小了
+
+![840ffdbf08b84216a62e3601ff1ea3b0.png](/uploads/840ffdbf08b84216a62e3601ff1ea3b0.png)
+
 
 ## 什么是JWT？
 
@@ -30,6 +33,9 @@ JWT 就是一个 自包含的、 紧凑的、 URL安全的字符串，里面携�
 - 用户体验极差：频繁跳登录页，或者请求频繁失败。
 - 刷新压力大：客户端必须非常频繁地用 Refresh T- oken 换新 Access Token，增加服务器负担和网络请求。
 - 竞态问题：Token 刚好在请求途中过期，容易出现“闪断”或重复刷新。
+
+![5eea655d4a70430c8bc354bb45d23960.png](/uploads/5eea655d4a70430c8bc354bb45d23960.png)
+
 - 移动端/弱网环境更糟：网络延迟高时，体验会明显下降。
 
 设置过短虽然更安全，但会牺牲可用性。
