@@ -63,9 +63,9 @@ if (sections === "*" || sections.includes("jotting")) items = items.concat(jotti
 // Get the latest content for display
 const latest = items.sort((a, b) => b.data.timestamp.getTime() - a.data.timestamp.getTime())[0];
 
-// Pick random note and jotting for display
-const randomNote = notes.length ? notes[Math.floor(Math.random() * notes.length)] : undefined;
-const randomJotting = jottings.length ? jottings[Math.floor(Math.random() * jottings.length)] : undefined;
+// Pick a random item (excluding the latest)
+const otherItems = items.filter(item => item !== latest);
+const randomItem = otherItems.length ? otherItems[Math.floor(Math.random() * otherItems.length)] : undefined;
 
 // Get the latest preface for display
 const preface = prefaces[0];
@@ -100,63 +100,47 @@ const { Content } = preface ? await render(preface) : ({} as any);
 					<Heatmap client:load {notes} {jottings} />
 
 					<blockquote class="flex-grow flex flex-col gap-4">
-{/*
-<div>
-  <h3>最新</h3>
-  <div class="flex flex-col sm:flex-row justify-between gap-1 mt-2">
-    <a href={`/${latest.type}/${latest.id.split("/").slice(1).join("/")}`} class="link">
-      {latest.data.series && `${latest.data.series} |`}
-      {latest.data.title}
-    </a>
-    <div class="flex gap-1">
-      {latest.data.tags?.map(tag => (
-        <span class="c-remark text-size-sm">#{tag}</span>
-      ))}
-    </div>
-  </div>
-  <time datetime={latest.data.timestamp.toISOString()} class="c-remark font-mono text-xs">
-    {Time(latest.data.timestamp)}
-  </time>
-</div>
-*/}
+						<h3 class="text-size-sm c-remark font-semibold">📌 最新</h3>
 
 						{
-							randomNote && (
+							latest && (
 								<div>
 									<div class="flex flex-col sm:flex-row justify-between gap-1 mt-2">
-										<a href={`/note/${randomNote.id.split("/").slice(1).join("/")}`} class="link">
-											{randomNote.data.series && `${randomNote.data.series} | `}
-											{randomNote.data.title}
+										<a href={`/${latest.type}/${latest.id.split("/").slice(1).join("/")}`} class="link">
+											{latest.data.series && `${latest.data.series} | `}
+											{latest.data.title}
 										</a>
 										<div class="flex gap-1">
-											{randomNote.data.tags?.map(tag => (
+											{latest.data.tags?.map(tag => (
 												<span class="c-remark text-size-sm">#{tag}</span>
 											))}
 										</div>
 									</div>
-									<time datetime={randomNote.data.timestamp.toISOString()} class="c-remark font-mono text-xs">
-										{Time(randomNote.data.timestamp)}
+									<time datetime={latest.data.timestamp.toISOString()} class="c-remark font-mono text-xs">
+										{Time(latest.data.timestamp)}
 									</time>
 								</div>
 							)
 						}
 
+						<h3 class="text-size-sm c-remark font-semibold mt-4">🎲 随机</h3>
+
 						{
-							randomJotting && (
+							randomItem && (
 								<div>
 									<div class="flex flex-col sm:flex-row justify-between gap-1 mt-2">
-										<a href={`/jotting/${randomJotting.id.split("/").slice(1).join("/")}`} class="link">
-											{randomJotting.data.series && `${randomJotting.data.series} | `}
-											{randomJotting.data.title}
+										<a href={`/${randomItem.type}/${randomItem.id.split("/").slice(1).join("/")}`} class="link">
+											{randomItem.data.series && `${randomItem.data.series} | `}
+											{randomItem.data.title}
 										</a>
 										<div class="flex gap-1">
-											{randomJotting.data.tags?.map(tag => (
+											{randomItem.data.tags?.map(tag => (
 												<span class="c-remark text-size-sm">#{tag}</span>
 											))}
 										</div>
 									</div>
-									<time datetime={randomJotting.data.timestamp.toISOString()} class="c-remark font-mono text-xs">
-										{Time(randomJotting.data.timestamp)}
+									<time datetime={randomItem.data.timestamp.toISOString()} class="c-remark font-mono text-xs">
+										{Time(randomItem.data.timestamp)}
 									</time>
 								</div>
 							)

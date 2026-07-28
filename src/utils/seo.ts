@@ -42,6 +42,18 @@ function siteImage(site: URL) {
 	return new URL(siteImagePath, site).toString();
 }
 
+/**
+ * 生成文章专用的 OG 图片 URL（动态生成于 /api/og.png）
+ */
+function articleOGImage(site: URL, article: CollectionEntry<"note"> | CollectionEntry<"jotting">): string {
+	const params = new URLSearchParams({
+		title: article.data.title,
+		type: article.collection,
+		date: article.data.timestamp.toISOString().slice(0, 10)
+	});
+	return new URL("/api/og.png?" + params.toString(), site).toString();
+}
+
 function articleDescription(article: CollectionEntry<"note"> | CollectionEntry<"jotting">) {
 	if (article.data.description) return article.data.description;
 	const parts = [article.data.series, article.data.tags?.join("、")].filter(Boolean);
@@ -106,15 +118,11 @@ export function getHomeSEO(site: URL): SEOConfig {
 /**
  * 为文章页面生成 SEO 配置
  */
-export function getArticleSEO(
-	site: URL,
-	pathname: string,
-	article: CollectionEntry<"note"> | CollectionEntry<"jotting">
-): SEOConfig {
+export function getArticleSEO(site: URL, pathname: string, article: CollectionEntry<"note"> | CollectionEntry<"jotting">): SEOConfig {
 	const fullTitle = `${article.data.title} | ${config.title}`;
 	const description = articleDescription(article);
 	const url = canonicalUrl(site, pathname);
-	const image = siteImage(site);
+	const image = articleOGImage(site, article);
 
 	return {
 		title: fullTitle,
@@ -201,13 +209,9 @@ export function getWebSiteSchema(site: URL) {
 /**
  * 生成 JSON-LD 结构化数据 - 文章
  */
-export function getArticleSchema(
-	site: URL,
-	pathname: string,
-	article: CollectionEntry<"note"> | CollectionEntry<"jotting">
-) {
+export function getArticleSchema(site: URL, pathname: string, article: CollectionEntry<"note"> | CollectionEntry<"jotting">) {
 	const url = canonicalUrl(site, pathname);
-	const image = siteImage(site);
+	const image = articleOGImage(site, article);
 
 	return {
 		"@context": "https://schema.org",
