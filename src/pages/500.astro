@@ -1,8 +1,14 @@
 ---
 import Base from "$layouts/Base.astro";
+import { getDefaultSEO } from "$utils/seo";
+
+const seoConfig = {
+	...getDefaultSEO(Astro.site!, Astro.url.pathname),
+	noindex: true
+};
 ---
 
-<Base title="500">
+<Base title="500" seoConfig={seoConfig}>
 	<main class="contents">
 		<div class="inline-flex flex-col items-center justify-center gap-2 text-center grow-0.5 animate-shaky">
 			<span class="text-6xl font-bold">500</span>

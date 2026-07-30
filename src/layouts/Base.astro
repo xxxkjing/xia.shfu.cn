@@ -12,7 +12,12 @@ import "medium-zoom/dist/style.css";
 
 let route = Astro.url.pathname;
 
-const { title: subtitle, description = config.description, article, seoConfig } = Astro.props as {
+const {
+	title: subtitle,
+	description = config.description,
+	article,
+	seoConfig
+} = Astro.props as {
 	title?: string;
 	description?: string;
 	article?: { timestamp: Date; section?: string; tags?: string[] };
@@ -56,7 +61,15 @@ const title = config.title;
 	<div class="flex flex-col mx-a px-3 w-[min(100%,1000px)]">
 		<div id="body" class="flex flex-col min-h-screen">
 			<header class="sticky top-0 flex items-center justify-between pt-3 pb-1 mb-4 bg-background z-2 sm:(static pb-12)">
-				<a href="/" class="text-size-lg sm:text-size-2xl font-bold">{title}</a>
+				{
+					route === "/" ? (
+						<h1 class="contents">
+							<a href="/" class="text-size-lg sm:text-size-2xl font-bold">{title}</a>
+						</h1>
+					) : (
+						<a href="/" class="text-size-lg sm:text-size-2xl font-bold">{title}</a>
+					)
+				}
 
 				<Navigator {route} client:load>
 					<Icon name="lucide:tent" slot="home" is:inline />

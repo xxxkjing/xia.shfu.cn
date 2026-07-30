@@ -20,6 +20,8 @@ export interface SEOConfig {
 			description?: string;
 			locale?: string;
 			siteName?: string;
+			imageWidth?: number;
+			imageHeight?: number;
 		};
 		article?: {
 			publishedTime?: string;
@@ -81,7 +83,9 @@ export function getDefaultSEO(site: URL, pathname: string): SEOConfig {
 			optional: {
 				description: config.description,
 				locale: "zh_CN",
-				siteName: config.title
+				siteName: config.title,
+				imageWidth: 96,
+				imageHeight: 96
 			}
 		}
 	};
@@ -109,7 +113,9 @@ export function getHomeSEO(site: URL): SEOConfig {
 			optional: {
 				description: config.description,
 				locale: "zh_CN",
-				siteName: config.title
+				siteName: config.title,
+				imageWidth: 96,
+				imageHeight: 96
 			}
 		}
 	};
@@ -138,13 +144,15 @@ export function getArticleSEO(site: URL, pathname: string, article: CollectionEn
 			optional: {
 				description,
 				locale: "zh_CN",
-				siteName: config.title
+				siteName: config.title,
+				imageWidth: 1200,
+				imageHeight: 630
 			},
 			article: {
 				publishedTime: article.data.timestamp.toISOString(),
 				modifiedTime: article.data.timestamp.toISOString(),
-				section: article.data.series,
-				tags: article.data.tags,
+				...(article.data.series && { section: article.data.series }),
+				...(article.data.tags && { tags: article.data.tags }),
 				authors: [config.author.name]
 			}
 		}
@@ -174,7 +182,9 @@ export function getListSEO(site: URL, pathname: string, subtitle: string, descri
 			optional: {
 				description: pageDescription,
 				locale: "zh_CN",
-				siteName: config.title
+				siteName: config.title,
+				imageWidth: 96,
+				imageHeight: 96
 			}
 		}
 	};
