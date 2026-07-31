@@ -1,6 +1,7 @@
 ---
 title: "Open WebUI：重复登录的一种可能性"
-timestamp: "2026-01-04T08:00:00.000Z"
+timestamp: "2026-01-04T00:00:00.000Z"
+series: "Open WebUI"
 tags: ["Open WebUI", "Cookie"]
 description: "OpenWebUI重复登录的一种可能性"
 sensitive: false
