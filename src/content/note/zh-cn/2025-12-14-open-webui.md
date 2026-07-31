@@ -1,11 +1,14 @@
 ---
-title: Open WebUI：配置联网搜索
-timestamp: 2025-12-14
-tags:
-  - Open WebUI
-  - 联网搜索
+title: "Open WebUI：配置联网搜索"
+timestamp: "2025-12-13T16:00:00.000Z"
+series: "Open WebUI"
+tags: ["Open WebUI", "联网搜索"]
+sensitive: false
 toc: true
+top: 0
+draft: false
 ---
+
 # 背景
 
 之前乘着十一假期，看着佬友的教程在 Huggingface Space 中部署了 Open WebUI ，随着使用频数提高，渐渐发现联网搜索不时出现问题
