@@ -24,6 +24,7 @@ let query: string = $state("");
 let active: number = $state(0);
 let input: HTMLInputElement | undefined = $state();
 let list: HTMLUListElement | undefined = $state();
+let dialog: HTMLDialogElement | undefined = $state();
 let index: SearchEntry[] = $state([]);
 let loading: boolean = $state(false);
 let failed: boolean = $state(false);
@@ -106,13 +107,20 @@ $effect(() => {
 function show() {
 	open = true;
 	loadIndex();
-	queueMicrotask(() => input?.focus());
 }
 
 function hide() {
 	open = false;
 	query = "";
 }
+
+// Open the native dialog once it is rendered (top layer, unaffected by parent transforms)
+$effect(() => {
+	if (open) {
+		dialog?.showModal();
+		queueMicrotask(() => input?.focus());
+	}
+});
 
 function navigate(url: string) {
 	hide();
@@ -195,16 +203,17 @@ onMount(() => {
 });
 </script>
 
-<button onclick={show} aria-label="搜索" class="inline-flex items-center" type="button">
+<button onclick={show} aria-label="搜索" class="items-center" type="button">
 	{@render search()}
 </button>
 
 {#if open}
-	<!-- svelte-ignore a11y_click_events_have_key_events -->
-	<!-- svelte-ignore a11y_interactive_supports_focus -->
-	<div role="button" onclick={hide} class="fixed top-0 left-0 w-screen h-screen pointer-events-auto bg-#aaaaaa88 z-3"></div>
-
-	<div class="fixed top-10vh left-50% -transform-translate-x-50% w-[min(calc(100%_-_1.5rem),640px)] max-h-80vh flex flex-col bg-background rd-3 shadow-lg z-4 overflow-hidden">
+	<dialog
+		bind:this={dialog}
+		onmousedown={event => (event.target == dialog ? hide() : null)}
+		onclose={() => (open = false)}
+		class="fixed m-a b-2 b-solid b-weak rd-md c-primary bg-background backdrop:bg-transparent shadow-md overflow-hidden w-[min(calc(100%_-_1.5rem),640px)] max-h-80vh"
+	>
 		<header class="flex items-center gap-2 px-3 py-2 border-b-1 border-weak">
 			<span class="c-remark shrink-0">{@render search()}</span>
 			<input
@@ -219,7 +228,7 @@ onMount(() => {
 			<button onclick={hide} aria-label="关闭" class="c-remark hover:c-primary transition-colors" type="button">{@render close()}</button>
 		</header>
 
-		<ul bind:this={list} class="flex flex-col gap-1 p-2 overflow-y-auto">
+		<ul bind:this={list} class="flex flex-col gap-1 p-2 max-h-[calc(80vh-5rem)] overflow-y-auto">
 			{#if loading}
 				<li class="py-8 text-center c-remark text-sm">正在加载索引…</li>
 			{:else if failed}
@@ -264,27 +273,10 @@ onMount(() => {
 			<span>Esc 关闭</span>
 			<span class="ml-a">共 {results.length} 条</span>
 		</footer>
-	</div>
+	</dialog>
 {/if}
 
 <style lang="less">
-	button[aria-label="搜索"] {
-		display: inline-flex;
-		align-items: center;
-		padding: 0.5rem 0.75rem;
-		font-size: 0.875rem;
-		font-weight: bold;
-		white-space: nowrap;
-		transition:
-			color 0.15s ease-in-out,
-			background-color 0.15s ease-in-out;
-
-		&:hover {
-			color: var(--background-color);
-			background-color: var(--primary-color);
-		}
-	}
-
 	ul {
 		mark {
 			padding: 0 0.1em;

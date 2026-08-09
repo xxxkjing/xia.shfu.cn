@@ -5,7 +5,6 @@ import App from "$layouts/App.astro";
 import Navigator from "$layouts/header/Navigator.svelte";
 import Footer from "$layouts/Footer.astro";
 import Tip from "$components/Tip.svelte";
-import Search from "$components/Search.svelte";
 import type { SEOConfig } from "$utils/seo";
 import "$styles/global.less";
 import "$styles/markdown.less";
@@ -72,25 +71,19 @@ const title = config.title;
 					)
 				}
 
-				<div class="flex items-center gap-1 sm:gap-3">
-					<Search client:load>
-						<Icon name="lucide:search" slot="search" is:inline />
-						<Icon name="lucide:x" slot="close" is:inline />
-					</Search>
-
-					<Navigator {route} client:load>
-						<Icon name="lucide:tent" slot="home" is:inline />
-						<Icon name="lucide:list" slot="note" />
-						<Icon name="lucide:at-sign" slot="about" />
-						<Icon name="lucide:feather" slot="jotting" />
-						<Icon name="lucide:earth" slot="globe" />
-						<Icon name="lucide:rss" slot="rss" />
-						<Icon name="lucide:sun" slot="sun" />
-						<Icon name="lucide:moon" slot="moon" />
-						<Icon name="lucide:align-justify" slot="bars" />
-						<Icon name="lucide:x" slot="close" is:inline />
-					</Navigator>
-				</div>
+				<Navigator {route} client:load>
+					<Icon name="lucide:tent" slot="home" is:inline />
+					<Icon name="lucide:list" slot="note" />
+					<Icon name="lucide:at-sign" slot="about" />
+					<Icon name="lucide:feather" slot="jotting" />
+					<Icon name="lucide:earth" slot="globe" />
+					<Icon name="lucide:rss" slot="rss" />
+					<Icon name="lucide:sun" slot="sun" />
+					<Icon name="lucide:moon" slot="moon" />
+					<Icon name="lucide:search" slot="search" is:inline />
+					<Icon name="lucide:x" slot="close" is:inline />
+					<Icon name="lucide:align-justify" slot="bars" />
+				</Navigator>
 			</header>
 
 			<slot />

@@ -1,8 +1,9 @@
 <script lang="ts">
 import { onMount, type Snippet } from "svelte";
 import ThemeSwitcher from "./ThemeSwitcher.svelte";
+import Search from "$components/Search.svelte";
 
-let { route, home, note, jotting, about, rss, sun, moon, bars, close }: { route: string } & { [key: string]: Snippet } = $props();
+let { route, home, note, jotting, about, rss, sun, moon, bars, close, search }: { route: string } & { [key: string]: Snippet } = $props();
 
 // Define home route and navigation routes configuration
 const homeRoute = "/";
@@ -66,6 +67,7 @@ onMount(() => {
 	</header>
 
 	<footer class="flex flex-col gap-2 sm:gap-5 sm:(flex-row gap-7)">
+		<Search {search} {close} />
 		<ThemeSwitcher {sun} {moon} />
 
 		<a href="/feed.xml" target="_blank" aria-label="Subscription" class="inline-flex">{@render rss()}</a>
