@@ -2,6 +2,11 @@ import type { APIRoute } from "astro";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { getCollection, render } from "astro:content";
 
+// Generate this endpoint as a static file at build time.
+// The project runs in SSR mode (output: "server"), so without this flag the
+// index would be rebuilt on every request, which is slow and error-prone.
+export const prerender = true;
+
 interface SearchEntry {
 	title: string;
 	description?: string;
@@ -46,22 +51,30 @@ export const GET: APIRoute = async ({ site }) => {
 
 		// Render each entry through AstroContainer so we can extract plain text
 		const container = await AstroContainer.create();
-		return Promise.all(
-			collection.map(async entry => {
-				const id = entry.id.split("/").slice(1).join("/");
-				const url = new URL(`/${basePath}/${id}`, site).toString();
-				const rendered = await container.renderToString((await render(entry)).Content);
-				return {
-					title: entry.data.title,
-					description: entry.data.description,
-					url,
-					type,
-					timestamp: entry.data.timestamp.toISOString(),
-					tags: entry.data.tags,
-					content: stripHtml(rendered)
-				} satisfies SearchEntry;
-			})
-		);
+		return (
+			await Promise.all(
+				collection.map(async entry => {
+					try {
+						const id = entry.id.split("/").slice(1).join("/");
+						const url = new URL(`/${basePath}/${id}`, site).toString();
+						const rendered = await container.renderToString((await render(entry)).Content);
+						return {
+							title: entry.data.title,
+							description: entry.data.description,
+							url,
+							type,
+							timestamp: entry.data.timestamp.toISOString(),
+							tags: entry.data.tags,
+							content: stripHtml(rendered)
+						} satisfies SearchEntry;
+					} catch (error) {
+						// Skip a single broken entry instead of failing the whole index
+						console.error(`[search-index] Failed to render ${type}/${entry.id}:`, error);
+						return null;
+					}
+				})
+			)
+		).filter((entry): entry is SearchEntry => entry !== null);
 	};
 
 	const entries = [...(await project("note", "note")), ...(await project("jotting", "jotting"))];

@@ -14,6 +14,7 @@ interface SearchEntry {
 interface SearchResult extends SearchEntry {
 	score: number;
 	excerpt: string;
+	titleHit: boolean;
 }
 
 let { search, close }: { [key: string]: Snippet } = $props();
@@ -75,11 +76,15 @@ function searchEntries(entries: SearchEntry[], raw: string): SearchResult[] {
 		results.push({
 			...entry,
 			score,
+			titleHit,
 			excerpt: makeExcerpt(entry.description || entry.content, term)
 		});
 	}
 
-	return results.sort((a, b) => b.score - a.score).slice(0, 20);
+	// Title matches always rank first; the rest are ordered by combined score
+	return results
+		.sort((a, b) => Number(b.titleHit) - Number(a.titleHit) || b.score - a.score)
+		.slice(0, 20);
 }
 
 let results: SearchResult[] = $derived(searchEntries(index, query));
@@ -100,6 +105,7 @@ $effect(() => {
 
 function show() {
 	open = true;
+	loadIndex();
 	queueMicrotask(() => input?.focus());
 }
 
@@ -176,10 +182,16 @@ function onKeydown(event: KeyboardEvent) {
 }
 
 onMount(() => {
-	document.addEventListener("keydown", onKeydown);
-
 	// Re-bind the global shortcut after Swup page transitions
-	document.addEventListener("swup:enable", () => document.addEventListener("keydown", onKeydown));
+	const bind = () => document.addEventListener("keydown", onKeydown);
+	document.addEventListener("keydown", onKeydown);
+	document.addEventListener("swup:enable", bind);
+
+	// Cleanup listeners on component destroy (e.g. Swup page transitions)
+	return () => {
+		document.removeEventListener("keydown", onKeydown);
+		document.removeEventListener("swup:enable", bind);
+	};
 });
 </script>
 
